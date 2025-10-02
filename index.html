@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila Completa - SQL e Modelagem de Dados: A Arte de Estruturar e Consultar Informações</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.7;
+            color: #333;
+            background-color: #fcfcfc;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 25px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            border-bottom-width: 4px;
+        }
+        h2 {
+            font-size: 2.2em;
+            margin-top: 60px;
+        }
+        h3 {
+            font-size: 1.6em;
+            border-bottom: 1px solid #bdc3c7;
+        }
+        code {
+            font-family: "Consolas", "Menlo", "Courier New", Courier, monospace;
+            background-color: #ecf0f1;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 1em;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        .analogy, .important, .pro-tip {
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #3498db;
+            background-color: #eaf5fc;
+            border-radius: 0 8px 8px 0;
+        }
+        .important {
+            border-left-color: #e74c3c;
+            background-color: #fceae8;
+        }
+        .pro-tip {
+            border-left-color: #2ecc71;
+            background-color: #eafaf1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #ecf0f1;
+            font-weight: bold;
+        }
+        .exercise-section {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .solution {
+            display: none;
+            margin-top: 15px;
+            border: 1px dashed #7f8c8d;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .toggle-solution {
+            cursor: pointer;
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .svg-diagram {
+            display: block;
+            margin: 25px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        /* Estilos para Diagramas SVG */
+        .entity { fill: #eaf5fc; stroke: #3498db; stroke-width: 2; }
+        .entity-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #2c3e50; }
+        .attribute-text { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+        .pk-text { font-weight: bold; text-decoration: underline; }
+        .fk-text { font-style: italic; }
+        .relationship-line { stroke: #34495e; stroke-width: 2; marker-end: url(#arrowhead); }
+        .venn-circle-a { fill: #3498db; fill-opacity: 0.5; stroke: #2980b9; stroke-width: 2; }
+        .venn-circle-b { fill: #e74c3c; fill-opacity: 0.5; stroke: #c0392b; stroke-width: 2; }
+        .venn-intersection { fill: #9b59b6; fill-opacity: 0.7; }
+        .venn-text { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+        .venn-label { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000; text-anchor: middle; }
+
+    </style>
+</head>
+<body>
+
+    <h1>Apostila Completa: SQL e Modelagem de Dados</h1>
+    <p style="text-align: center; font-size: 1.2em; color: #555;"><em>A Arte de Estruturar e Consultar Informações</em></p>
+
+    <h2>Capítulo 1: Organizando o Mundo - Fundamentos da Modelagem Relacional</h2>
+    
+    <p>Bem-vindo à sua jornada no universo dos dados! Antes de escrevermos nossa primeira linha de código, precisamos entender a pergunta mais fundamental de todas: como organizamos as informações do mundo real de uma forma que um computador possa entender, gerenciar e consultar eficientemente? A resposta está na <strong>modelagem de dados</strong>, e este capítulo é o seu alicerce.</p>
+
+    <h3>1.1. O que é um Banco de Dados? Por que precisamos deles?</h3>
+    <p>Em sua essência, um <strong>banco de dados</strong> é uma coleção organizada de informações. Mas essa definição é muito simples. A verdadeira magia de um banco de dados está no sistema que o gerencia, o chamado <strong>Sistema de Gerenciamento de Banco de Dados (SGBD)</strong>. É ele que nos dá o poder de armazenar, recuperar e manipular dados de forma segura e eficiente.</p>
+    
+    <div class="analogy">
+        <h4>Analogia: A Biblioteca e a Pilha de Papéis</h4>
+        <p>Imagine que você tem mil livros importantes. Você pode simplesmente empilhá-los em um canto da sala. Isso é uma coleção de dados, mas é caótica. Encontrar um livro específico seria um pesadelo. Você não saberia se alguém pegou um livro, se ele foi devolvido, ou se há duas cópias do mesmo livro.</p>
+        <p>Agora, imagine uma biblioteca. Cada livro tem um código único, está em uma prateleira específica, e há um sistema de fichas (ou um computador) que diz exatamente onde cada livro está, quem o pegou emprestado e quando deve ser devolvido. A biblioteca é um <strong>banco de dados</strong>, e o bibliotecário, junto com seu sistema de catalogação, é o <strong>SGBD</strong>.</p>
+    </div>
+
+    <p>Os bancos de dados resolvem problemas críticos que uma simples planilha ou um arquivo de texto não conseguem resolver em larga escala:</p>
+    <ul>
+        <li><strong>Consistência:</strong> Garantem que os dados sigam regras predefinidas. Por exemplo, um campo de "data de nascimento" não pode conter um texto como "ontem".</li>
+        <li><strong>Acesso Concorrente:</strong> Permitem que múltiplos usuários acessem e modifiquem os dados ao mesmo tempo, sem que um atrapalhe o outro.</li>
+        <li><strong>Segurança:</strong> Controlam quem pode ver e alterar quais informações.</li>
+        <li><strong>Durabilidade:</strong> Uma vez que uma informação é salva com sucesso, ela não se perde, mesmo que o sistema falhe logo em seguida.</li>
+    </ul>
+
+    <p>Essas garantias são frequentemente resumidas pelo acrônimo <strong>ACID</strong> (Atomicidade, Consistência, Isolamento, Durabilidade), que veremos em detalhes no Capítulo 8. Por enquanto, entenda que ele representa o conjunto de propriedades que tornam um banco de dados confiável.</p>
+
+    <h3>1.2. Os Blocos de Construção: Tabelas, Colunas e Linhas</h3>
+    <p>No modelo de banco de dados mais popular do mundo, o <strong>modelo relacional</strong>, os dados são organizados em uma estrutura intuitiva que se assemelha a uma coleção de planilhas interligadas. Os três blocos fundamentais são:</p>
+    
+    <ul>
+        <li><strong>Tabelas (ou Entidades):</strong> Representam um "tipo" de coisa do mundo real. Se estivéssemos modelando uma loja virtual, teríamos tabelas para <code>Clientes</code>, <code>Produtos</code> e <code>Pedidos</code>. Cada tabela armazena informações sobre um único assunto.</li>
+        <li><strong>Colunas (ou Atributos):</strong> São as características ou propriedades da entidade que a tabela descreve. Na tabela <code>Clientes</code>, teríamos colunas como <code>nome</code>, <code>email</code>, <code>data_de_nascimento</code>, etc.</li>
+        <li><strong>Linhas (ou Registros):</strong> Representam uma ocorrência única daquela entidade. Cada linha na tabela <code>Clientes</code> seria um cliente específico, com seus próprios dados preenchidos nas colunas.</li>
+    </ul>
+
+    <p>Veja um exemplo de uma tabela <code>Clientes</code>:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>id_cliente (Coluna)</th>
+                <th>nome (Coluna)</th>
+                <th>email (Coluna)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>João Silva</td>
+                <td>joao.silva@email.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maria Oliveira</td>
+                <td>maria.o@email.com</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Carlos Pereira</td>
+                <td>carlos.p@email.com</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Neste exemplo, a linha inteira de João Silva é um <strong>registro</strong>.</p>
+
+    <h3>1.3. A Chave da Organização: Chaves Primárias (Primary Keys)</h3>
+    <p>Como garantimos que cada linha em uma tabela seja absolutamente única? E se tivermos dois clientes chamados "João Silva"? É aqui que entra o conceito mais importante da modelagem de dados: a <strong>Chave Primária</strong> (ou <em>Primary Key</em> - PK).</p>
+    <p>Uma Chave Primária é uma coluna (ou um conjunto de colunas) cujo valor identifica unicamente cada linha da tabela. Ela possui duas regras de ouro:</p>
+    <ol>
+        <li><strong>Deve ser Única:</strong> O valor da chave primária não pode se repetir na mesma tabela.</li>
+        <li><strong>Não pode ser Nula:</strong> Ela deve sempre ter um valor.</li>
+    </ol>
+
+    <div class="analogy">
+        <h4>Analogia: O Identificador Único</h4>
+        <p>Pense na Chave Primária como o <strong>CPF</strong> de uma pessoa ou o <strong>Chassi</strong> de um carro. Duas pessoas podem ter o mesmo nome, mas nunca o mesmo CPF. O CPF é o que garante a unicidade de cada cidadão no sistema do governo. Em nossas tabelas, geralmente criamos uma coluna numérica de identificação (comumente chamada de <code>id</code> ou <code>id_nome_da_tabela</code>) para servir como chave primária.</p>
+    </div>
+    <p>Na tabela de Clientes acima, a coluna <code>id_cliente</code> é a Chave Primária.</p>
+
+    <h3>1.4. O Poder das Conexões: Chaves Estrangeiras (Foreign Keys) e Relacionamentos</h3>
+    <p>Se as tabelas são como ilhas de informação, as <strong>Chaves Estrangeiras</strong> (ou <em>Foreign Keys</em> - FK) são as pontes que as conectam. Uma Chave Estrangeira é uma coluna em uma tabela que se refere à Chave Primária de outra tabela.</p>
+    <p>Vamos expandir nosso exemplo da loja virtual. Temos a tabela <code>Clientes</code> (com PK <code>id_cliente</code>) e agora criamos uma tabela <code>Pedidos</code>. Como sabemos qual cliente fez qual pedido?</p>
+    
+    <p>Simples: adicionamos uma coluna na tabela <code>Pedidos</code>, que chamaremos de <code>id_cliente</code>, para armazenar o ID do cliente que fez aquele pedido. Esta coluna na tabela <code>Pedidos</code> é uma Chave Estrangeira que "aponta" para a Chave Primária da tabela <code>Clientes</code>.</p>
+    
+    <p><strong>Tabela: Clientes</strong></p>
+    <table>
+        <thead><tr><th>id_cliente (PK)</th><th>nome</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>João Silva</td></tr>
+            <tr><td>2</td><td>Maria Oliveira</td></tr>
+        </tbody>
+    </table>
+
+    <p><strong>Tabela: Pedidos</strong></p>
+    <table>
+        <thead><tr><th>id_pedido (PK)</th><th>data_pedido</th><th>valor_total</th><th>id_cliente (FK)</th></tr></thead>
+        <tbody>
+            <tr><td>101</td><td>2025-10-01</td><td>150.00</td><td>2</td></tr>
+            <tr><td>102</td><td>2025-10-01</td><td>75.50</td><td>1</td></tr>
+            <tr><td>103</td><td>2025-10-02</td><td>200.00</td><td>2</td></tr>
+        </tbody>
+    </table>
+
+    <p>Analisando a tabela <code>Pedidos</code>, podemos ver que o pedido <code>101</code> foi feito pelo cliente de ID <code>2</code> (Maria Oliveira), e o pedido <code>102</code> foi feito pelo cliente de ID <code>1</code> (João Silva). Essa conexão é a essência do modelo relacional.</p>
+
+    <h4>Diagrama Entidade-Relacionamento (DER)</h4>
+    <p>Para visualizar essas conexões, arquitetos de dados usam Diagramas Entidade-Relacionamento. Abaixo está uma representação SVG simples do nosso modelo:</p>
+
+    <svg width="400" height="200" class="svg-diagram" viewBox="0 0 400 200">
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#34495e" />
+            </marker>
+        </defs>
+        
+        <rect x="20" y="20" width="150" height="100" class="entity" />
+        <text x="95" y="40" class="entity-text" text-anchor="middle">Clientes</text>
+        <line x1="25" y1="50" x2="165" y2="50" stroke="#bdc3c7" stroke-width="1" />
+        <text x="30" y="70" class="attribute-text pk-text">id_cliente (PK)</text>
+        <text x="30" y="90" class="attribute-text">nome</text>
+        
+        <rect x="230" y="20" width="150" height="120" class="entity" />
+        <text x="305" y="40" class="entity-text" text-anchor="middle">Pedidos</text>
+        <line x1="235" y1="50" x2="375" y2="50" stroke="#bdc3c7" stroke-width="1" />
+        <text x="240" y="70" class="attribute-text pk-text">id_pedido (PK)</text>
+        <text x="240" y="90" class="attribute-text">data_pedido</text>
+        <text x="240" y="110" class="attribute-text">valor_total</text>
+        <text x="240" y="130" class="attribute-text fk-text">id_cliente (FK)</text>
+        
+        <path d="M 170 70 C 200 70, 200 130, 230 130" stroke="#34495e" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    </svg>
+
+    <p>Este diagrama mostra visualmente que a tabela <code>Pedidos</code> possui uma Chave Estrangeira, <code>id_cliente</code>, que se conecta à Chave Primária da tabela <code>Clientes</code>. Isso estabelece a relação entre as duas entidades.</p>
+
+    <h4>Tipos de Relacionamento</h4>
+    <p>Existem três tipos principais de relacionamentos entre tabelas:</p>
+    <ol>
+        <li><strong>Um-para-Um (1:1):</strong> É raro. Ocorre quando uma linha em uma Tabela A só pode se relacionar com uma única linha na Tabela B, e vice-versa. Exemplo: Uma tabela <code>Pessoas</code> e uma tabela <code>Dados_Confidenciais</code>. Cada pessoa tem apenas um conjunto de dados confidenciais.</li>
+        <li><strong>Um-para-Muitos (1:N):</strong> É o tipo mais comum. Uma linha na Tabela A pode se relacionar com muitas linhas na Tabela B, mas uma linha na Tabela B só pode se relacionar com uma da Tabela A. Nosso exemplo <code>Clientes</code> e <code>Pedidos</code> é um caso clássico: <strong>um</strong> cliente pode ter <strong>muitos</strong> pedidos, mas <strong>um</strong> pedido pertence a apenas <strong>um</strong> cliente.</li>
+        <li><strong>Muitos-para-Muitos (N:N):</strong> Ocorre quando muitas linhas na Tabela A podem se relacionar com muitas linhas na Tabela B. Exemplo: <code>Alunos</code> e <code>Disciplinas</code>. Um aluno pode se inscrever em muitas disciplinas, e uma disciplina pode ter muitos alunos. Para implementar isso, criamos uma terceira tabela, chamada de "tabela de junção" ou "tabela associativa" (ex: <code>Inscricoes</code>), que contém as chaves estrangeiras de ambas as tabelas (<code>id_aluno</code> e <code>id_disciplina</code>).</li>
+    </ol>
+    
+    <div class="exercise-section">
+        <h3>Mão na Massa: Exercícios do Capítulo 1</h3>
+        <h4>Nível 1: Fixação</h4>
+        <ol>
+            <li>O que é um SGBD e qual sua principal função?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>SGBD significa Sistema de Gerenciamento de Banco de Dados. Sua principal função é ser o software que gerencia um banco de dados, permitindo aos usuários criar, ler, atualizar e deletar dados (operações CRUD) de forma controlada, segura e eficiente.</p></div>
+            <li>Em um banco de dados relacional, qual é a diferença entre uma coluna e uma linha?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Uma <strong>coluna</strong> (ou atributo) representa uma característica da informação que está sendo armazenada (ex: 'nome', 'preço'). Uma <strong>linha</strong> (ou registro) representa uma instância única e completa dessa informação (ex: os dados de um produto específico).</p></div>
+            <li>Quais são as duas regras fundamentais de uma Chave Primária?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>1. <strong>Unicidade:</strong> Seus valores não podem se repetir na mesma tabela. 2. <strong>Não-nulidade:</strong> Ela deve sempre conter um valor; não pode ser nula.</p></div>
+            <li>O que é uma Chave Estrangeira e para que ela serve?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Uma Chave Estrangeira é uma coluna em uma tabela que se refere à Chave Primária de outra tabela. Ela serve para criar um relacionamento (uma conexão) entre as duas tabelas, garantindo a integridade referencial dos dados.</p></div>
+            <li>Dê um exemplo do mundo real para um relacionamento Um-para-Muitos.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Um exemplo clássico é <code>País</code> e <code>Cidades</code>. <strong>Um</strong> país pode ter <strong>muitas</strong> cidades, mas uma cidade pertence a apenas <strong>um</strong> país.</p></div>
+            <li>Para que serve uma tabela de junção (ou associativa)? Em qual tipo de relacionamento ela é necessária?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Uma tabela de junção é usada para implementar um relacionamento <strong>Muitos-para-Muitos (N:N)</strong>. Ela conecta duas tabelas armazenando as chaves estrangeiras de ambas. Por exemplo, para relacionar <code>Livros</code> e <code>Autores</code> (um livro pode ter vários autores, e um autor pode escrever vários livros), criaríamos uma tabela <code>Livro_Autor</code> com <code>id_livro</code> e <code>id_autor</code>.</p></div>
+            <li>Qual é a analogia usada para descrever a Chave Primária?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>A analogia do CPF de uma pessoa ou do Chassi de um veículo. É um identificador que é garantido ser único para cada registro.</p></div>
+        </ol>
+        <h4>Nível 2: Combinação</h4>
+        <ol start="8">
+            <li>Você precisa modelar um sistema para uma clínica veterinária. Quais seriam as três tabelas (entidades) principais que você criaria? Liste também 2 ou 3 colunas (atributos) para cada uma.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Possíveis tabelas seriam:</p><ul><li><strong>Donos:</strong> <code>id_dono (PK)</code>, <code>nome</code>, <code>telefone</code>.</li><li><strong>Animais:</strong> <code>id_animal (PK)</code>, <code>nome</code>, <code>especie</code>, <code>raca</code>, <code>id_dono (FK)</code>.</li><li><strong>Consultas:</strong> <code>id_consulta (PK)</code>, <code>data_consulta</code>, <code>diagnostico</code>, <code>id_animal (FK)</code>.</li></ul></div>
+            <li>No modelo da clínica veterinária do exercício anterior, qual é o tipo de relacionamento entre a tabela <code>Donos</code> e a tabela <code>Animais</code>? Qual coluna seria a Chave Estrangeira e em qual tabela ela estaria?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>O relacionamento é <strong>Um-para-Muitos (1:N)</strong>. Um dono pode ter muitos animais, mas um animal pertence a apenas um dono. A chave estrangeira seria a coluna <code>id_dono</code> e estaria na tabela <code>Animais</code> (o lado "muitos" da relação).</p></div>
+            <li>Imagine um sistema de blog. Você tem tabelas para <code>Posts</code> e <code>Comentarios</code>. Qual o relacionamento entre elas? Onde você colocaria a Chave Estrangeira?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>O relacionamento é <strong>Um-para-Muitos (1:N)</strong>. Um post pode ter muitos comentários, mas um comentário pertence a apenas um post. A chave estrangeira <code>id_post</code> seria colocada na tabela <code>Comentarios</code>.</p></div>
+            <li>Agora, no mesmo blog, pense nas tabelas <code>Posts</code> e <code>Tags</code> (etiquetas, como "tecnologia", "dados", etc.). Qual é o tipo de relacionamento aqui e como você o implementaria?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>O relacionamento é <strong>Muitos-para-Muitos (N:N)</strong>. Um post pode ter várias tags, e uma tag pode ser aplicada a vários posts. Para implementar, criaríamos uma tabela de junção chamada <code>Post_Tags</code> com duas colunas: <code>id_post (FK)</code> e <code>id_tag (FK)</code>.</p></div>
+            <li>Por que não é uma boa ideia usar o email de um cliente como Chave Primária, mesmo que seja único?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Existem alguns motivos: 1) Pessoas podem mudar de email, e alterar uma chave primária é uma operação complexa e arriscada, pois ela pode estar sendo usada como chave estrangeira em muitas outras tabelas. 2) Emails são textos (strings) longos, e usar números inteiros para chaves é muito mais eficiente para o banco de dados realizar buscas e junções. Chaves primárias devem ser, idealmente, estáveis e imutáveis.</p></div>
+        </ol>
+        <h4>Nível 3: Desafios</h4>
+        <ol start="13">
+            <li>Modele um sistema simples para a Netflix. Você precisa armazenar informações sobre <code>Filmes</code>, <code>Atores</code> e o elenco de cada filme. Quais tabelas você criaria, quais seriam suas colunas principais (incluindo PKs e FKs), e como elas se relacionariam? Desenhe um diagrama simples (pode ser textual) para representar.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Este é um caso de relacionamento Muitos-para-Muitos, pois um filme tem muitos atores e um ator pode atuar em muitos filmes.</p><p><strong>Tabelas:</strong></p><ol><li><strong>Filmes</strong><ul><li><code>id_filme (PK)</code></li><li><code>titulo</code></li><li><code>ano_lancamento</code></li><li><code>genero</code></li></ul></li><li><strong>Atores</strong><ul><li><code>id_ator (PK)</code></li><li><code>nome_ator</code></li><li><code>data_nascimento</code></li></ul></li><li><strong>Elenco (Tabela de Junção)</strong><ul><li><code>id_filme (FK para Filmes)</code></li><li><code>id_ator (FK para Atores)</code></li><li><code>personagem</code> (atributo extra do relacionamento)</li></ul></li></ol><p><strong>Diagrama Textual:</strong></p><pre><code>[Filmes] --&lt; [Elenco] &gt;-- [Atores]</code></pre><p>A tabela Elenco conecta as outras duas. A chave primária da tabela Elenco seria a combinação de (<code>id_filme</code>, <code>id_ator</code>).</p></div>
+            <li>Você está projetando um banco de dados para o Spotify. Pense nas entidades <code>Usuarios</code>, <code>Musicas</code> e <code>Playlists</code>. Como você modelaria a relação que permite que um usuário crie várias playlists e que uma playlist contenha várias músicas? (Dica: uma música também pode estar em várias playlists diferentes).</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Precisamos de dois relacionamentos principais aqui.</p><p><strong>Tabelas:</strong></p><ol><li><strong>Usuarios</strong><ul><li><code>id_usuario (PK)</code></li><li><code>nome_usuario</code></li><li><code>email</code></li></ul></li><li><strong>Musicas</strong><ul><li><code>id_musica (PK)</code></li><li><code>titulo_musica</code></li><li><code>artista</code></li><li><code>duracao_segundos</code></li></ul></li><li><strong>Playlists</strong><ul><li><code>id_playlist (PK)</code></li><li><code>nome_playlist</code></li><li><code>data_criacao</code></li><li><code>id_usuario (FK para Usuarios)</code>  &lt;-- Relacionamento 1:N</li></ul></li><li><strong>Playlist_Musicas (Tabela de Junção)</strong><ul><li><code>id_playlist (FK para Playlists)</code></li><li><code>id_musica (FK para Musicas)</code></li><li><code>ordem_na_playlist</code> (atributo extra)</li></ul></li></ol><p><strong>Explicação dos Relacionamentos:</strong></p><ul><li><strong>Usuarios e Playlists (1:N):</strong> Um usuário pode criar muitas playlists, mas uma playlist é criada por um único usuário. Isso é resolvido com a FK <code>id_usuario</code> na tabela <code>Playlists</code>.</li><li><strong>Playlists e Musicas (N:N):</strong> Uma playlist pode conter muitas músicas, e uma música pode estar em muitas playlists. Isso é resolvido com a tabela de junção <code>Playlist_Musicas</code>.</li></ul></div>
+            <li>Explique por que em um relacionamento 1:N (como <code>Clientes</code> e <code>Pedidos</code>), a chave estrangeira (<code>id_cliente</code>) fica na tabela do lado "N" (<code>Pedidos</code>) e não o contrário. O que aconteceria se tentássemos colocar uma coluna <code>id_pedido</code> na tabela <code>Clientes</code>?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>A chave estrangeira fica sempre na tabela do lado "muitos" (N) porque uma linha nessa tabela precisa se referir a exatamente <strong>uma</strong> linha na tabela do lado "um" (1). Um pedido pertence a um único cliente, então a coluna <code>id_cliente</code> na tabela <code>Pedidos</code> pode armazenar perfeitamente esse valor único.</p><p>Se tentássemos fazer o contrário e colocar uma coluna <code>id_pedido</code> na tabela <code>Clientes</code>, teríamos um grande problema. Um cliente pode fazer <strong>vários</strong> pedidos. Como armazenaríamos múltiplos IDs de pedido em uma única coluna e em uma única linha de cliente? Não seria possível de forma estruturada. Teríamos que colocar '102, 105, 110' em uma única célula, o que quebra a primeira regra da normalização de dados (atomicidade) e tornaria as consultas extremamente difíceis e ineficientes. A estrutura correta garante que cada célula contenha apenas um valor.</p></div>
+        </ol>
+    </div>
+
+    <h2>Capítulo 2: A Linguagem Universal dos Dados - Comandos Essenciais de SQL</h2>
+    <p>Agora que entendemos como os dados são estruturados, é hora de aprender a "conversar" com o banco de dados. A linguagem que usaremos para fazer perguntas, inserir, modificar e apagar dados é o <strong>SQL</strong>. Ele é o padrão universal para interagir com bancos de dados relacionais, e dominar seus comandos essenciais é o primeiro passo para se tornar um profissional de dados.</p>
+    <h3>2.1. Introdução ao SQL (Structured Query Language)</h3>
+    <p>SQL, que se pronuncia "S-Q-L" ou "sequel", significa Linguagem de Consulta Estruturada. Apesar do nome, ela faz muito mais do que apenas consultar. É uma linguagem declarativa, o que significa que você diz ao banco de dados <strong>o que</strong> você quer, e ele descobre a melhor maneira de <strong>como</strong> obter o resultado. Isso é diferente de linguagens imperativas como Python, onde você descreve passo a passo como realizar uma tarefa.</p>
+    <div class="pro-tip">
+        <h4>Dica de Sênior: SQL é um Ativo para a Carreira</h4>
+        <p>Não importa se você quer ser Engenheiro de Dados, Analista, Cientista de Dados ou até mesmo Desenvolvedor de Software: fluência em SQL é uma das habilidades mais requisitadas e duradouras do mercado de tecnologia. Invista tempo aqui, pois o retorno é garantido.</p>
+    </div>
+    <p>Para os exemplos deste capítulo, vamos assumir que temos a seguinte tabela <code>produtos</code> em nosso banco de dados PostgreSQL:</p>
+    <table>
+        <caption>Tabela: produtos</caption>
+        <thead><tr><th>id_produto (PK)</th><th>nome_produto</th><th>categoria</th><th>preco</th><th>estoque</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>Notebook Pro</td><td>Eletrônicos</td><td>5500.00</td><td>50</td></tr>
+            <tr><td>2</td><td>Smartphone X</td><td>Eletrônicos</td><td>3200.50</td><td>120</td></tr>
+            <tr><td>3</td><td>Cadeira Gamer</td><td>Móveis</td><td>1800.00</td><td>35</td></tr>
+            <tr><td>4</td><td>Mesa de Escritório</td><td>Móveis</td><td>750.00</td><td>20</td></tr>
+            <tr><td>5</td><td>Teclado Mecânico</td><td>Acessórios</td><td>450.75</td><td>200</td></tr>
+            <tr><td>6</td><td>Monitor 4K</td><td>Eletrônicos</td><td>2500.00</td><td>40</td></tr>
+            <tr><td>7</td><td>Mouse Sem Fio</td><td>Acessórios</td><td>150.00</td><td>300</td></tr>
+        </tbody>
+    </table>
+    <h3>2.2. Recuperando Dados: O Comando `SELECT`</h3>
+    <p>O comando mais fundamental do SQL é o <code>SELECT</code>. Ele é usado para ler e recuperar dados de uma ou mais tabelas. A estrutura básica é sempre a mesma: você seleciona (<code>SELECT</code>) algumas colunas de (<code>FROM</code>) uma tabela.</p>
+    <h4>Selecionando Todas as Colunas</h4>
+    <p>Para ver todos os dados de uma tabela, usamos o asterisco (<code>*</code>), que é um coringa para "todas as colunas".</p>
+    <pre><code>-- Seleciona todas as colunas da tabela de produtos
+SELECT * FROM produtos;</code></pre>
+    <h4>Selecionando Colunas Específicas</h4>
+    <p>Na maioria das vezes, você não precisa de todas as colunas. É mais eficiente pedir apenas as que você necessita. Para isso, liste os nomes das colunas, separados por vírgula.</p>
+    <pre><code>-- Seleciona apenas o nome e o preço dos produtos
+SELECT nome_produto, preco FROM produtos;</code></pre>
+    <h4>Usando `AS` para criar Apelidos (Aliases)</h4>
+    <p>Você pode renomear as colunas no resultado da sua consulta usando a palavra-chave <code>AS</code>. Isso é útil para tornar os relatórios mais legíveis ou para evitar nomes de colunas ambíguos em consultas complexas.</p>
+    <pre><code>-- Renomeia as colunas no resultado
+SELECT 
+    nome_produto AS "Nome do Produto", 
+    preco AS "Preço (R$)",
+    estoque AS "Quantidade em Estoque"
+FROM produtos;</code></pre>
+    <h3>2.3. Filtrando com Precisão: A Cláusula `WHERE`</h3>
+    <p>Raramente queremos todos os registros de uma tabela. A cláusula <code>WHERE</code> é usada para filtrar as linhas e retornar apenas aquelas que correspondem a uma condição específica. Ela sempre vem depois do <code>FROM</code>.</p>
+    <h4>Operadores de Comparação</h4>
+    <ul><li><code>=</code> (Igual a)</li><li><code>!=</code> ou <code><></code> (Diferente de)</li><li><code>></code> (Maior que)</li><li><code><</code> (Menor que)</li><li><code>>=</code> (Maior ou igual a)</li><li><code><=</code> (Menor ou igual a)</li></ul>
+    <pre><code>-- Seleciona produtos da categoria 'Eletrônicos'
+SELECT nome_produto, preco FROM produtos
+WHERE categoria = 'Eletrônicos';</code></pre>
+    <h4>Operadores Lógicos: `AND`, `OR`, `NOT`</h4>
+    <ul><li><code>AND</code>: Ambas as condições devem ser verdadeiras.</li><li><code>OR</code>: Pelo menos uma das condições deve ser verdadeira.</li><li><code>NOT</code>: Inverte o resultado de uma condição.</li></ul>
+    <pre><code>-- Produtos de 'Eletrônicos' E com preço maior que 3000
+SELECT nome_produto, preco FROM produtos
+WHERE categoria = 'Eletrônicos' AND preco > 3000;</code></pre>
+    <div class="important"><h4>Parênteses são Seus Amigos</h4><p>Quando você combina <code>AND</code> e <code>OR</code> na mesma cláusula <code>WHERE</code>, use parênteses para garantir que a lógica seja avaliada na ordem que você deseja. O <code>AND</code> tem precedência sobre o <code>OR</code>, o que pode levar a resultados inesperados se você não agrupar suas condições explicitamente.</p></div>
+    <h4>Operadores Especiais: `BETWEEN`, `IN`, `LIKE`, `IS NULL`</h4>
+    <ul><li><code>BETWEEN</code>: Verifica se um valor está dentro de um intervalo (inclusivo).</li><li><code>IN</code>: Verifica se um valor corresponde a qualquer valor em uma lista.</li><li><code>LIKE</code>: Usado para buscar padrões em strings. <code>%</code> representa múltiplos caracteres, <code>_</code> representa um único.</li><li><code>IS NULL</code>: Verifica se uma coluna não tem valor.</li></ul>
+    <pre><code>-- Produtos com preço entre 500 e 2000
+SELECT nome_produto, preco FROM produtos
+WHERE preco BETWEEN 500 AND 2000;</code></pre>
+    <h3>2.4. Organizando os Resultados: `ORDER BY` e `LIMIT`</h3>
+    <h4>`ORDER BY`</h4>
+    <p>A cláusula <code>ORDER BY</code> é usada para ordenar o conjunto de resultados. Por padrão, a ordenação é ascendente (`ASC`). Para ordenar do maior para o menor, use `DESC`.</p>
+    <pre><code>-- Ordena os produtos do mais barato para o mais caro
+SELECT nome_produto, preco FROM produtos
+ORDER BY preco ASC;</code></pre>
+    <h4>`LIMIT`</h4>
+    <p>A cláusula <code>LIMIT</code> restringe o número de linhas retornadas, útil com <code>ORDER BY</code> para encontrar os "top N" resultados.</p>
+    <pre><code>-- Encontra os 3 produtos mais caros
+SELECT nome_produto, preco FROM produtos
+ORDER BY preco DESC
+LIMIT 3;</code></pre>
+    <h3>2.5. Manipulando Dados: `INSERT`, `UPDATE` e `DELETE`</h3>
+    <div class="important"><h4>A Regra de Ouro: SEMPRE use `WHERE` com `UPDATE` e `DELETE`!</h4><p>Se você esquecer a cláusula <code>WHERE</code>, a operação será aplicada a <strong>TODAS AS LINHAS DA TABELA</strong>. Esta é uma das maneiras mais rápidas de destruir dados. Sempre verifique sua cláusula <code>WHERE</code>.</p></div>
+    <h4>`INSERT INTO`</h4>
+    <p>Adiciona uma nova linha a uma tabela.</p>
+    <pre><code>-- Adiciona um novo produto à tabela
+INSERT INTO produtos (id_produto, nome_produto, categoria, preco, estoque)
+VALUES (8, 'Webcam HD', 'Acessórios', 250.00, 150);</code></pre>
+    <h4>`UPDATE`</h4>
+    <p>Modifica dados em linhas existentes que correspondem a uma condição.</p>
+    <pre><code>-- Aumenta o preço do Notebook Pro em 10%
+UPDATE produtos
+SET preco = preco * 1.10
+WHERE id_produto = 1;</code></pre>
+    <h4>`DELETE`</h4>
+    <p>Remove linhas de uma tabela que correspondem a uma condição.</p>
+    <pre><code>-- Remove o produto 'Mesa de Escritório'
+DELETE FROM produtos
+WHERE id_produto = 4;</code></pre>
+    <div class="exercise-section">
+        <h3>Mão na Massa: Exercícios do Capítulo 2</h3>
+        <p>Use a tabela <code>produtos</code> dos exemplos para resolver os exercícios.</p>
+        <h4>Nível 1: Fixação</h4>
+        <ol>
+            <li>Escreva uma consulta para selecionar apenas o nome e a categoria de todos os produtos.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, categoria FROM produtos;</code></pre></div>
+            <li>Escreva uma consulta que retorne todos os produtos da categoria 'Móveis'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT * FROM produtos WHERE categoria = 'Móveis';</code></pre></div>
+            <li>Escreva uma consulta para listar todos os produtos com estoque abaixo de 50 unidades.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT * FROM produtos WHERE estoque < 50;</code></pre></div>
+            <li>Escreva uma consulta que liste o nome e o preço dos produtos ordenados pelo nome em ordem alfabética (A-Z).</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco FROM produtos ORDER BY nome_produto ASC;</code></pre></div>
+            <li>Escreva uma consulta para encontrar os 5 produtos com maior quantidade em estoque.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, estoque FROM produtos ORDER BY estoque DESC LIMIT 5;</code></pre></div>
+            <li>Escreva um comando para inserir um novo produto: um 'SSD 1TB' na categoria 'Acessórios', com preço 650.00 e 80 unidades em estoque. (Assuma que o próximo <code>id_produto</code> é 9).</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>INSERT INTO produtos (id_produto, nome_produto, categoria, preco, estoque) VALUES (9, 'SSD 1TB', 'Acessórios', 650.00, 80);</code></pre></div>
+            <li>Escreva um comando para aumentar o estoque do 'Teclado Mecânico' (id_produto 5) em 50 unidades.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>UPDATE produtos SET estoque = estoque + 50 WHERE id_produto = 5;</code></pre></div>
+            <li>Escreva um comando para deletar o produto 'Mouse Sem Fio' (id_produto 7).</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>DELETE FROM produtos WHERE id_produto = 7;</code></pre></div>
+        </ol>
+        <h4>Nível 2: Combinação</h4>
+        <ol start="9">
+            <li>Selecione o nome e o preço de todos os produtos da categoria 'Eletrônicos' que custam menos de R$ 3000,00.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco FROM produtos WHERE categoria = 'Eletrônicos' AND preco < 3000;</code></pre></div>
+            <li>Liste todos os produtos que são da categoria 'Acessórios' ou 'Móveis'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT * FROM produtos WHERE categoria IN ('Acessórios', 'Móveis');</code></pre></div>
+            <li>Liste o nome, a categoria e o preço dos produtos que não são da categoria 'Eletrônicos'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, categoria, preco FROM produtos WHERE categoria != 'Eletrônicos';</code></pre></div>
+            <li>Encontre todos os produtos cujo nome contenha a palavra 'Mesa' ou 'Cadeira'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT * FROM produtos WHERE nome_produto LIKE '%Mesa%' OR nome_produto LIKE '%Cadeira%';</code></pre></div>
+            <li>Liste o nome e o valor total de cada produto em estoque (preço * estoque), renomeando a coluna calculada para 'valor_total_estoque'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, (preco * estoque) AS valor_total_estoque FROM produtos;</code></pre></div>
+            <li>Selecione os 2 produtos mais baratos da categoria 'Eletrônicos'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco FROM produtos WHERE categoria = 'Eletrônicos' ORDER BY preco ASC LIMIT 2;</code></pre></div>
+            <li>Escreva um comando para dar um desconto de 15% em todos os produtos da categoria 'Móveis'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>UPDATE produtos SET preco = preco * 0.85 WHERE categoria = 'Móveis';</code></pre></div>
+        </ol>
+        <h4>Nível 3: Desafios</h4>
+        <ol start="16">
+            <li>Uma promoção relâmpago foi anunciada: todos os produtos da categoria 'Acessórios' com menos de 250 unidades em estoque terão seu preço reduzido em 20%. Escreva a consulta `UPDATE` para aplicar esta promoção.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>UPDATE produtos SET preco = preco * 0.80 WHERE categoria = 'Acessórios' AND estoque < 250;</code></pre></div>
+            <li>O gerente decidiu que produtos com um valor de estoque total (preço * estoque) acima de R$ 200.000,00 são "itens de alto valor". Escreva uma consulta para listar o nome do produto e este valor total (com um alias) apenas para os itens de alto valor, ordenados do maior valor para o menor.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, (preco * estoque) AS valor_estoque_total FROM produtos WHERE (preco * estoque) > 200000 ORDER BY valor_estoque_total DESC;</code></pre></div>
+            <li>Escreva uma consulta que retorne o nome, preço e estoque dos 3 produtos mais caros que NÃO sejam da categoria 'Eletrônicos'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco, estoque FROM produtos WHERE categoria != 'Eletrônicos' ORDER BY preco DESC LIMIT 3;</code></pre></div>
+            <li>O fornecedor do 'Smartphone X' (id_produto 2) faliu. O produto precisa ser descontinuado. Escreva um comando `DELETE` que remova este produto da tabela. Antes disso, qual comando `SELECT` você rodaria para ter certeza de que está deletando a linha correta?</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><p>Primeiro, o comando de verificação:</p><pre><code>SELECT * FROM produtos WHERE id_produto = 2 AND nome_produto = 'Smartphone X';</code></pre><p>Após confirmar que a consulta retorna apenas a linha desejada, executa-se o comando `DELETE`:</p><pre><code>DELETE FROM produtos WHERE id_produto = 2;</code></pre></div>
+            <li>Liste todos os produtos cujo nome começa com 'T' ou termina com 'o', e que tenham um preço entre 100 e 500. Ordene o resultado pelo preço, do mais caro para o mais barato.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT * FROM produtos WHERE (nome_produto LIKE 'T%' OR nome_produto LIKE '%o') AND preco BETWEEN 100 AND 500 ORDER BY preco DESC;</code></pre></div>
+        </ol>
+    </div>
+
+    <h2>Capítulo 3: Trabalhando com o Tempo - Manipulação de Datas e Horas</h2>
+    <p>Dados temporais são onipresentes. Data de cadastro de um cliente, momento de uma transação, data de entrega de um pedido — quase toda análise de dados envolve, de alguma forma, o fator tempo. Aprender a manipular datas e horas em SQL é uma habilidade crucial para responder perguntas como "quantas vendas ocorreram no último trimestre?" ou "qual é o tempo médio entre o pedido e a entrega?".</p>
+    
+    <p>Para este capítulo, usaremos uma tabela <code>pedidos</code> com a seguinte estrutura e dados:</p>
+    <table>
+        <caption>Tabela: pedidos</caption>
+        <thead>
+            <tr><th>id_pedido (PK)</th><th>id_cliente (FK)</th><th>data_pedido (TIMESTAMP)</th><th>status</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>101</td><td>2</td><td>2024-08-22 10:30:00</td><td>Entregue</td></tr>
+            <tr><td>102</td><td>1</td><td>2024-09-05 14:00:00</td><td>Enviado</td></tr>
+            <tr><td>103</td><td>2</td><td>2024-09-15 18:45:10</td><td>Processando</td></tr>
+            <tr><td>104</td><td>3</td><td>2025-01-10 09:00:00</td><td>Entregue</td></tr>
+            <tr><td>105</td><td>1</td><td>2025-02-28 23:10:55</td><td>Entregue</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>3.1. Tipos de Dados Temporais em PostgreSQL</h3>
+    <p>O PostgreSQL oferece um conjunto rico de tipos de dados para armazenar informações temporais. Os mais importantes são:</p>
+    <ul>
+        <li><code>DATE</code>: Armazena apenas a data (ano, mês, dia), sem informação de horário. Ex: <code>'2025-10-02'</code>.</li>
+        <li><code>TIMESTAMP</code> (ou <code>TIMESTAMP WITHOUT TIME ZONE</code>): Armazena data e hora completas (ano, mês, dia, hora, minuto, segundo, frações de segundo). <strong>Não</strong> armazena informação de fuso horário.</li>
+        <li><code>TIMESTAMPTZ</code> (ou <code>TIMESTAMP WITH TIME ZONE</code>): Similar ao <code>TIMESTAMP</code>, mas é consciente do fuso horário. O PostgreSQL armazena o valor em UTC (Tempo Universal Coordenado) e o converte para o fuso horário da sessão do cliente ao ser exibido. É o tipo recomendado para aplicações globais.</li>
+        <li><code>INTERVAL</code>: Armazena uma duração de tempo. Ex: <code>'5 days'</code>, <code>'12 hours'</code>, <code>'3 months'</code>.</li>
+    </ul>
+
+    <h3>3.2. Funções Essenciais de Data e Hora</h3>
+    
+    <h4>Obtendo a Data e Hora Atuais</h4>
+    <p>É muito comum precisar registrar o momento exato em que um evento ocorreu. PostgreSQL fornece várias funções para isso:</p>
+    <ul>
+        <li><code>NOW()</code>: Retorna a data e hora atuais do início da transação, com fuso horário (retorna um <code>TIMESTAMPTZ</code>).</li>
+        <li><code>CURRENT_TIMESTAMP</code>: Sinônimo de <code>NOW()</code>.</li>
+        <li><code>CURRENT_DATE</code>: Retorna apenas a data atual (retorna um <code>DATE</code>).</li>
+        <li><code>CURRENT_TIME</code>: Retorna apenas a hora atual (retorna um <code>TIME WITH TIME ZONE</code>).</li>
+    </ul>
+    <pre><code>SELECT NOW(), CURRENT_DATE;</code></pre>
+
+    <h4>Extraindo Partes de uma Data: `EXTRACT`</h4>
+    <p>Frequentemente, queremos analisar apenas uma parte de uma data, como o ano, o mês ou o dia da semana. A função `EXTRACT` é perfeita para isso.</p>
+    <p>Sintaxe: <code>EXTRACT(parte FROM data)</code>. A <code>parte</code> pode ser: <code>YEAR</code>, <code>MONTH</code>, <code>DAY</code>, <code>HOUR</code>, <code>MINUTE</code>, <code>SECOND</code>, <code>DOW</code> (Dia da Semana, 0=Domingo, 6=Sábado), <code>DOY</code> (Dia do Ano), <code>WEEK</code> (Semana do ano), <code>QUARTER</code> (Trimestre), etc.</p>
+    <pre><code>-- Extrai o ano, mês e dia do pedido 101
+SELECT
+    EXTRACT(YEAR FROM data_pedido) AS ano,
+    EXTRACT(MONTH FROM data_pedido) AS mes,
+    EXTRACT(DAY FROM data_pedido) AS dia,
+    EXTRACT(DOW FROM data_pedido) AS dia_da_semana
+FROM pedidos
+WHERE id_pedido = 101;</code></pre>
+    <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>ano</th><th>mes</th><th>dia</th><th>dia_da_semana</th></tr></thead><tbody><tr><td>2024</td><td>8</td><td>22</td><td>4</td></tr></tbody></table>
+    <p>(O dia da semana é 4, que corresponde a uma Quinta-feira).</p>
+
+    <h4>Formatando Datas para Exibição: `TO_CHAR`</h4>
+    <p>Enquanto `EXTRACT` retorna um número, `TO_CHAR` converte uma data para um texto (string) formatado de acordo com um padrão que você define. Isso é ideal para criar relatórios legíveis para humanos.</p>
+    <p>Sintaxe: <code>TO_CHAR(data, 'padrão')</code>. Alguns padrões úteis:</p>
+    <ul>
+        <li><code>YYYY</code>: Ano com 4 dígitos</li>
+        <li><code>MM</code>: Mês com 2 dígitos (01-12)</li>
+        <li><code>DD</code>: Dia com 2 dígitos (01-31)</li>
+        <li><code>HH24</code>: Hora em formato 24h (00-23)</li>
+        <li><code>MI</code>: Minuto (00-59)</li>
+        <li><code>SS</code>: Segundo (00-59)</li>
+        <li><code>Day</code>: Nome do dia da semana por extenso (em inglês, capitalizado)</li>
+        <li><code>Month</code>: Nome do mês por extenso</li>
+    </ul>
+    <pre><code>-- Formata a data do pedido 101 em um formato amigável
+SELECT TO_CHAR(data_pedido, 'DD/MM/YYYY HH24:MI:SS') AS data_formatada
+FROM pedidos
+WHERE id_pedido = 101;</code></pre>
+     <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>data_formatada</th></tr></thead><tbody><tr><td>22/08/2024 10:30:00</td></tr></tbody></table>
+
+    <h3>3.3. Aritmética com Datas</h3>
+    <p>Realizar cálculos com datas é surpreendentemente fácil em PostgreSQL. Você pode somar ou subtrair um <code>INTERVAL</code> de uma data ou timestamp.</p>
+    
+    <pre><code>-- Adiciona 7 dias e 2 horas à data do pedido 102
+SELECT
+    data_pedido,
+    data_pedido + INTERVAL '7 days' AS data_mais_7d,
+    data_pedido + INTERVAL '2 hours' AS data_mais_2h
+FROM pedidos
+WHERE id_pedido = 102;</code></pre>
+     <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>data_pedido</th><th>data_mais_7d</th><th>data_mais_2h</th></tr></thead><tbody><tr><td>2024-09-05 14:00:00</td><td>2024-09-12 14:00:00</td><td>2024-09-05 16:00:00</td></tr></tbody></table>
+    
+    <p>Subtrair duas datas resulta em um número de dias. Subtrair dois timestamps resulta em um <code>INTERVAL</code>.</p>
+
+    <div class="pro-tip">
+        <h4>Exemplo Prático: Calculando a Idade</h4>
+        <p>Uma tarefa muito comum é calcular a idade de alguém a partir da data de nascimento. A função `AGE(timestamp)` faz exatamente isso, retornando um intervalo descritivo.</p>
+        <pre><code>-- Supondo que a data de nascimento seja '1990-05-15'
+SELECT AGE(NOW(), '1990-05-15'::timestamp);
+-- Resultado pode ser: 35 years 4 months 17 days ...
+        
+-- Para obter a idade apenas em anos, podemos usar EXTRACT:
+SELECT EXTRACT(YEAR FROM AGE(NOW(), '1990-05-15'::timestamp));
+-- Resultado: 35
+</code></pre>
+    </div>
+
+    <div class="exercise-section">
+        <h3>Mão na Massa: Exercícios do Capítulo 3</h3>
+        <p>Use a tabela <code>pedidos</code> para os exercícios.</p>
+        <h4>Nível 1: Fixação</h4>
+        <ol>
+            <li>Selecione todos os pedidos feitos no ano de 2024.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2024;</code></pre></div>
+            
+            <li>Selecione o ID do pedido e a hora em que ele foi feito, para todos os pedidos.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, EXTRACT(HOUR FROM data_pedido) AS hora_do_pedido FROM pedidos;</code></pre></div>
+            
+            <li>Selecione os pedidos feitos no mês de Setembro (mês 9).</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos WHERE EXTRACT(MONTH FROM data_pedido) = 9;</code></pre></div>
+            
+            <li>Mostre a data de cada pedido no formato brasileiro 'DD/MM/YYYY'. Dê um alias para a coluna.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, TO_CHAR(data_pedido, 'DD/MM/YYYY') AS data_br FROM pedidos;</code></pre></div>
+            
+            <li>Qual seria a data de entrega estimada para o pedido 103 se ela for 5 dias após a data do pedido?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT data_pedido, data_pedido + INTERVAL '5 days' AS entrega_estimada FROM pedidos WHERE id_pedido = 103;</code></pre></div>
+            
+            <li>Use a função <code>NOW()</code> para ver a data e hora atuais do servidor.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT NOW();</code></pre></div>
+
+            <li>Selecione todos os pedidos que foram feitos antes de 01 de Janeiro de 2025.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos WHERE data_pedido < '2025-01-01';</code></pre></div>
+        </ol>
+        <h4>Nível 2: Combinação</h4>
+        <ol start="8">
+            <li>Selecione os pedidos que foram feitos em 2024 e que tenham o status 'Entregue'.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2024 AND status = 'Entregue';</code></pre></div>
+            
+            <li>Selecione o ID dos pedidos feitos no segundo semestre (mês >= 7) de qualquer ano.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, data_pedido FROM pedidos WHERE EXTRACT(MONTH FROM data_pedido) >= 7;</code></pre></div>
+            
+            <li>Liste os pedidos feitos no período da tarde (entre 12:00 e 17:59).</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos WHERE EXTRACT(HOUR FROM data_pedido) BETWEEN 12 AND 17;</code></pre></div>
+
+            <li>Para cada pedido, mostre a data no formato 'Mês por extenso, YYYY' (ex: 'August, 2024').</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, TO_CHAR(data_pedido, 'Month, YYYY') AS data_formatada FROM pedidos;</code></pre></div>
+            
+            <li>Calcule há quanto tempo cada pedido foi feito em relação à data atual.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, data_pedido, NOW() - data_pedido AS tempo_desde_pedido FROM pedidos;</code></pre></div>
+            
+            <li>Selecione os pedidos que foram feitos no primeiro trimestre (Quarter 1) de 2025.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos 
+WHERE EXTRACT(YEAR FROM data_pedido) = 2025 AND EXTRACT(QUARTER FROM data_pedido) = 1;</code></pre></div>
+        </ol>
+        <h4>Nível 3: Desafios</h4>
+        <ol start="14">
+            <li>Uma promoção de frete grátis foi válida apenas para pedidos feitos das 08:00:00 às 11:59:59. Liste todos os pedidos que se qualificaram para a promoção.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT * FROM pedidos
+WHERE EXTRACT(HOUR FROM data_pedido) BETWEEN 8 AND 11;
+-- Ou de forma mais precisa:
+SELECT * FROM pedidos
+WHERE CAST(data_pedido AS TIME) BETWEEN '08:00:00' AND '11:59:59';</code></pre></div>
+            
+            <li>Selecione todos os pedidos feitos em um dia de fim de semana (Sábado ou Domingo). Dica: use `EXTRACT(DOW ...)` onde 0 é Domingo e 6 é Sábado.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, data_pedido, TO_CHAR(data_pedido, 'Day') as dia_semana
+FROM pedidos
+WHERE EXTRACT(DOW FROM data_pedido) IN (0, 6);</code></pre></div>
+
+            <li>O sistema precisa enviar um lembrete de avaliação 15 dias após a data de cada pedido. Calcule essa data para todos os pedidos e nomeie a coluna como 'data_lembrete'.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_pedido, data_pedido, data_pedido + INTERVAL '15 days' AS data_lembrete FROM pedidos;</code></pre></div>
+
+            <li>Escreva uma consulta que retorne o número de dias entre o pedido mais antigo e o pedido mais recente na tabela. Dica: você pode precisar de funções que veremos no próximo capítulo, como `MIN()` e `MAX()`. Tente pesquisar!</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Esta é uma prévia do próximo capítulo, mas uma solução seria:</p><pre><code>SELECT MAX(data_pedido) - MIN(data_pedido) AS intervalo_total FROM pedidos;
+-- Para obter em dias:
+SELECT MAX(data_pedido)::date - MIN(data_pedido)::date AS dias_entre_pedidos FROM pedidos;
+</code></pre></div>
+        </ol>
+    </div>
+
+    <h2>Capítulo 4: Análise de Dados com SQL - Agregações e Junções</h2>
+    <p>Este é o capítulo onde o SQL transcende a simples recuperação de dados e se torna uma poderosa ferramenta de análise. Vamos aprender a resumir grandes volumes de informação em métricas significativas e a combinar dados de múltiplas tabelas para obter insights completos. Estes são os pilares da inteligência de negócios (Business Intelligence) e da análise de dados.</p>
+    
+    <p>Para este capítulo, vamos usar um conjunto de tabelas mais completo, representando nossa loja virtual:</p>
+    <table><caption>Tabela: clientes</caption><thead><tr><th>id_cliente</th><th>nome</th><th>cidade</th></tr></thead><tbody><tr><td>1</td><td>João Silva</td><td>São Paulo</td></tr><tr><td>2</td><td>Maria Oliveira</td><td>Rio de Janeiro</td></tr><tr><td>3</td><td>Carlos Pereira</td><td>Belo Horizonte</td></tr><tr><td>4</td><td>Ana Costa</td><td>São Paulo</td></tr></tbody></table>
+    <table><caption>Tabela: produtos</caption><thead><tr><th>id_produto</th><th>nome_produto</th><th>categoria</th><th>preco</th></tr></thead><tbody><tr><td>1</td><td>Notebook Pro</td><td>Eletrônicos</td><td>5500.00</td></tr><tr><td>2</td><td>Smartphone X</td><td>Eletrônicos</td><td>3200.50</td></tr><tr><td>3</td><td>Cadeira Gamer</td><td>Móveis</td><td>1800.00</td></tr><tr><td>4</td><td>Teclado Mecânico</td><td>Acessórios</td><td>450.75</td></tr></tbody></table>
+    <table><caption>Tabela: pedidos</caption><thead><tr><th>id_pedido</th><th>id_cliente</th><th>data_pedido</th></tr></thead><tbody><tr><td>101</td><td>2</td><td>2024-08-22</td></tr><tr><td>102</td><td>1</td><td>2024-09-05</td></tr><tr><td>103</td><td>2</td><td>2024-09-15</td></tr><tr><td>104</td><td>3</td><td>2025-01-10</td></tr><tr><td>105</td><td>1</td><td>2025-02-28</td></tr><tr><td>106</td><td>4</td><td>2025-03-05</td></tr><tr><td>107</td><td>2</td><td>2025-03-07</td></tr></tbody></table>
+    <table><caption>Tabela: itens_pedido (Tabela de Junção)</caption><thead><tr><th>id_pedido</th><th>id_produto</th><th>quantidade</th></tr></thead><tbody><tr><td>101</td><td>2</td><td>1</td></tr><tr><td>102</td><td>1</td><td>1</td></tr><tr><td>102</td><td>4</td><td>1</td></tr><tr><td>103</td><td>3</td><td>2</td></tr><tr><td>104</td><td>1</td><td>1</td></tr><tr><td>105</td><td>4</td><td>2</td></tr><tr><td>106</td><td>2</td><td>1</td></tr><tr><td>107</td><td>3</td><td>1</td></tr></tbody></table>
+    
+    <h3>4.1. Resumindo Dados: Funções de Agregação</h3>
+    <p>Funções de agregação pegam um conjunto de valores (como uma coluna inteira) e retornam um único valor resumido.</p>
+    <ul>
+        <li><code>COUNT()</code>: Conta o número de linhas. <code>COUNT(*)</code> conta todas as linhas; <code>COUNT(coluna)</code> conta as linhas onde a coluna não é nula.</li>
+        <li><code>SUM()</code>: Soma todos os valores de uma coluna numérica.</li>
+        <li><code>AVG()</code>: Calcula a média dos valores de uma coluna numérica.</li>
+        <li><code>MIN()</code>: Encontra o valor mínimo em uma coluna.</li>
+        <li><code>MAX()</code>: Encontra o valor máximo em uma coluna.</li>
+    </ul>
+    <pre><code>-- Análises simples sobre a tabela de produtos
+SELECT
+    COUNT(*) AS total_de_produtos,
+    SUM(preco) AS soma_dos_precos,
+    AVG(preco) AS preco_medio,
+    MIN(preco) AS produto_mais_barato,
+    MAX(preco) AS produto_mais_caro
+FROM produtos;</code></pre>
+    <p><strong>Resultado:</strong> (Uma única linha com os valores calculados)</p>
+    <table><thead><tr><th>total_de_produtos</th><th>soma_dos_precos</th><th>preco_medio</th><th>produto_mais_barato</th><th>produto_mais_caro</th></tr></thead><tbody><tr><td>4</td><td>10951.25</td><td>2737.8125</td><td>450.75</td><td>5500.00</td></tr></tbody></table>
+
+    <h3>4.2. Criando Grupos de Análise: A Cláusula `GROUP BY`</h3>
+    <p>A verdadeira mágica acontece quando combinamos funções de agregação com a cláusula <code>GROUP BY</code>. Ela agrupa as linhas que têm os mesmos valores em colunas especificadas em um conjunto resumido. A função de agregação é então aplicada a cada um desses grupos.</p>
+    <div class="analogy">
+        <h4>Analogia: Separando Legos por Cor</h4>
+        <p>Imagine um balde gigante com peças de Lego de várias cores. Se eu pedir para você "contar as peças", você me dará um número total (isso é uma agregação simples). Mas se eu pedir "conte as peças <strong>por cada cor</strong>", você primeiro separará as peças em montes (vermelho, azul, amarelo) e depois contará as peças em cada monte. A separação em montes é o <code>GROUP BY cor</code>, e a contagem de cada monte é a função <code>COUNT()</code> aplicada a cada grupo.</p>
+    </div>
+    
+    <div class="important"><h4>Regra do `GROUP BY`</h4><p>Qualquer coluna que esteja no seu <code>SELECT</code> e que <strong>não</strong> esteja dentro de uma função de agregação (como <code>COUNT</code>, <code>SUM</code>, etc.) <strong>DEVE</strong> estar na sua cláusula <code>GROUP BY</code>.</p></div>
+
+    <pre><code>-- Contando quantos produtos existem em cada categoria
+SELECT
+    categoria,
+    COUNT(*) AS quantidade_de_produtos
+FROM produtos
+GROUP BY categoria;</code></pre>
+    <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>categoria</th><th>quantidade_de_produtos</th></tr></thead><tbody><tr><td>Eletrônicos</td><td>2</td></tr><tr><td>Móveis</td><td>1</td></tr><tr><td>Acessórios</td><td>1</td></tr></tbody></table>
+
+    <h3>4.3. Filtrando Grupos: A Cláusula `HAVING`</h3>
+    <p>E se quisermos filtrar os resultados <strong>depois</strong> que os grupos foram formados? Por exemplo, "mostre-me apenas as categorias com mais de 1 produto". Não podemos usar <code>WHERE COUNT(*) > 1</code>, porque o <code>WHERE</code> filtra as linhas <strong>antes</strong> da agregação acontecer.</p>
+    <p>Para isso, usamos a cláusula <code>HAVING</code>. Ela funciona exatamente como o <code>WHERE</code>, mas filtra os grupos <strong>após</strong> a agregação.</p>
+    
+    <pre><code>-- Mostra apenas as categorias com mais de 1 produto
+SELECT
+    categoria,
+    COUNT(*) AS quantidade_de_produtos
+FROM produtos
+GROUP BY categoria
+HAVING COUNT(*) > 1;</code></pre>
+    <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>categoria</th><th>quantidade_de_produtos</th></tr></thead><tbody><tr><td>Eletrônicos</td><td>2</td></tr></tbody></table>
+    <p>Resumindo: <strong>`WHERE` filtra linhas, `HAVING` filtra grupos.</strong></p>
+
+    <h3>4.4. Combinando Tabelas: A Magia dos `JOINs`</h3>
+    <p>Raramente a resposta para uma pergunta de negócio está em uma única tabela. Precisamos combinar informações. O <code>JOIN</code> é a cláusula que nos permite conectar linhas de duas ou mais tabelas com base em uma coluna relacionada (geralmente a PK de uma tabela e a FK de outra).</p>
+    
+    <h4><code>INNER JOIN</code>: A Intersecção</h4>
+    <p>O <code>INNER JOIN</code> retorna apenas as linhas que têm valores correspondentes em <strong>ambas</strong> as tabelas. É o tipo de join mais comum.</p>
+    
+    <svg width="400" height="200" class="svg-diagram">
+        <text x="125" y="30" class="venn-label">Tabela A (Clientes)</text>
+        <text x="275" y="30" class="venn-label">Tabela B (Pedidos)</text>
+        <circle cx="150" cy="110" r="70" class="venn-circle-a" />
+        <circle cx="250" cy="110" r="70" class="venn-circle-b" />
+        <path d="M194.8,162.4 C175.2,185.3 141.2,188.4 118.3,168.8 C115.1,166.4 112.2,163.8 109.5,161.0 C114.9,131.1 131.7,104.4 156.2,87.6 C173.8,99.9 188.1,117.2 194.8,137.6 C196.2,142.4 196.5,147.4 196.2,152.4 C195.8,157.4 195.3,162.4 194.8,162.4Z" class="venn-intersection" />
+        <text x="200" y="115" class="venn-text">INNER JOIN</text>
+    </svg>
+    <p>Este diagrama de Venn mostra que o <code>INNER JOIN</code> seleciona apenas a área de intersecção, ou seja, clientes que fizeram pedidos e pedidos que têm clientes.</p>
+
+    <pre><code>-- Lista o nome do cliente e a data de cada pedido que ele fez
+SELECT
+    c.nome AS nome_cliente,
+    p.data_pedido
+FROM clientes AS c
+INNER JOIN pedidos AS p ON c.id_cliente = p.id_cliente;</code></pre>
+    <p><strong>Resultado:</strong></p>
+    <table><thead><tr><th>nome_cliente</th><th>data_pedido</th></tr></thead><tbody><tr><td>Maria Oliveira</td><td>2024-08-22</td></tr><tr><td>João Silva</td><td>2024-09-05</td></tr><tr><td>Maria Oliveira</td><td>2024-09-15</td></tr><tr><td>Carlos Pereira</td><td>2025-01-10</td></tr><tr><td>João Silva</td><td>2025-02-28</td></tr><tr><td>Ana Costa</td><td>2025-03-05</td></tr><tr><td>Maria Oliveira</td><td>2025-03-07</td></tr></tbody></table>
+
+    <h4><code>LEFT JOIN</code>: Priorizando a Esquerda</h4>
+    <p>O <code>LEFT JOIN</code> retorna <strong>todas</strong> as linhas da tabela da esquerda (a primeira mencionada) e as linhas correspondentes da tabela da direita. Se não houver correspondência, as colunas da tabela da direita virão com valor <code>NULL</code>.</p>
+    
+    <svg width="400" height="200" class="svg-diagram">
+        <text x="125" y="30" class="venn-label">Tabela A (Clientes)</text>
+        <text x="275" y="30" class="venn-label">Tabela B (Pedidos)</text>
+        <circle cx="150" cy="110" r="70" class="venn-circle-a" style="fill-opacity: 0.8;" />
+        <circle cx="250" cy="110" r="70" class="venn-circle-b" />
+        <text x="150" y="115" class="venn-text">LEFT JOIN</text>
+    </svg>
+    <p>O diagrama mostra que o <code>LEFT JOIN</code> seleciona toda a Tabela A, independentemente de haver uma correspondência na Tabela B. É útil para perguntas como "liste todos os clientes e, se eles tiverem pedidos, mostre-os".</p>
+    
+    <pre><code>-- Lista TODOS os clientes e os IDs de seus pedidos (se existirem)
+SELECT
+    c.nome AS nome_cliente,
+    p.id_pedido
+FROM clientes AS c
+LEFT JOIN pedidos AS p ON c.id_cliente = p.id_cliente;</code></pre>
+    <p>Se tivéssemos um cliente que nunca comprou, ele apareceria na lista com <code>id_pedido</code> nulo.</p>
+
+    <p><code>RIGHT JOIN</code> é o oposto (retorna tudo da tabela da direita), e <code>FULL OUTER JOIN</code> retorna tudo de ambas as tabelas, preenchendo com <code>NULL</code> onde não há correspondência.</p>
+
+    <h3>4.5. Agregações Avançadas: `ROLLUP`, `CUBE` e `GROUPING SETS`</h3>
+    <p>Estas são cláusulas avançadas do `GROUP BY` que permitem criar subtotais e totais gerais em uma única consulta, muito úteis para relatórios.</p>
+    <ul>
+        <li><code>ROLLUP</code>: Cria subtotais hierárquicos, da direita para a esquerda na lista do `GROUP BY`, mais um total geral.</li>
+        <li><code>CUBE</code>: Cria subtotais para todas as combinações possíveis das colunas no `GROUP BY`.</li>
+        <li><code>GROUPING SETS</code>: Permite especificar exatamente quais combinações de agrupamento você quer.</li>
+    </ul>
+
+    <pre><code>-- Exemplo com ROLLUP: Vendas por categoria e depois o total geral
+SELECT
+    p.categoria,
+    COUNT(i.id_produto) AS total_vendido
+FROM produtos p
+JOIN itens_pedido i ON p.id_produto = i.id_produto
+GROUP BY ROLLUP(p.categoria);</code></pre>
+    <p>O resultado incluiria linhas para cada categoria e uma linha final com o total geral, onde `categoria` seria `NULL`.</p>
+
+
+    <div class="exercise-section">
+        <h3>Mão na Massa: Exercícios do Capítulo 4</h3>
+        <p>Use as 4 tabelas (clientes, produtos, pedidos, itens_pedido) para resolver os exercícios.</p>
+        <h4>Nível 1: Fixação</h4>
+        <ol>
+            <li>Quantos clientes estão cadastrados na cidade de 'São Paulo'?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT COUNT(*) FROM clientes WHERE cidade = 'São Paulo';</code></pre></div>
+
+            <li>Qual é o preço do produto mais caro?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT MAX(preco) FROM produtos;</code></pre></div>
+
+            <li>Qual é a média de preço dos produtos da categoria 'Eletrônicos'?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT AVG(preco) FROM produtos WHERE categoria = 'Eletrônicos';</code></pre></div>
+            
+            <li>Conte quantos pedidos foram feitos no total.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT COUNT(*) FROM pedidos;</code></pre></div>
+
+            <li>Usando um <code>INNER JOIN</code>, liste o nome de cada cliente e a data de seus respectivos pedidos.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT c.nome, p.data_pedido FROM clientes c INNER JOIN pedidos p ON c.id_cliente = p.id_cliente;</code></pre></div>
+
+            <li>Calcule o número de pedidos feitos por cada cliente. Mostre o <code>id_cliente</code> e a contagem.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT id_cliente, COUNT(id_pedido) AS numero_de_pedidos FROM pedidos GROUP BY id_cliente;</code></pre></div>
+
+            <li>Liste todas as categorias de produtos, sem repetição.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT DISTINCT categoria FROM produtos; -- Ou GROUP BY categoria</code></pre></div>
+        </ol>
+        <h4>Nível 2: Combinação</h4>
+        <ol start="8">
+            <li>Liste os nomes dos clientes que fizeram pedidos em 2025. Cada nome deve aparecer apenas uma vez.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT DISTINCT c.nome
+FROM clientes c
+JOIN pedidos p ON c.id_cliente = p.id_cliente
+WHERE EXTRACT(YEAR FROM p.data_pedido) = 2025;</code></pre></div>
+
+            <li>Calcule o valor total de cada pedido. O valor de um item é `quantidade * preco`. Você precisará juntar 3 tabelas. Mostre o <code>id_pedido</code> e o <code>valor_total</code>.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    ip.id_pedido,
+    SUM(ip.quantidade * p.preco) AS valor_total
+FROM itens_pedido ip
+JOIN produtos p ON ip.id_produto = p.id_produto
+GROUP BY ip.id_pedido
+ORDER BY ip.id_pedido;</code></pre></div>
+
+            <li>Quais cidades têm mais de um cliente cadastrado?</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT cidade, COUNT(id_cliente) AS qtd_clientes
+FROM clientes
+GROUP BY cidade
+HAVING COUNT(id_cliente) > 1;</code></pre></div>
+
+            <li>Liste o nome de todos os produtos e a quantidade total vendida de cada um. Ordene pela quantidade vendida, do maior para o menor.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    p.nome_produto,
+    SUM(ip.quantidade) AS total_vendido
+FROM produtos p
+JOIN itens_pedido ip ON p.id_produto = ip.id_produto
+GROUP BY p.nome_produto
+ORDER BY total_vendido DESC;</code></pre></div>
+
+            <li>Usando um <code>LEFT JOIN</code>, encontre os clientes que <strong>nunca</strong> fizeram um pedido. Dica: o <code>id_pedido</code> será <code>NULL</code>.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT c.nome
+FROM clientes c
+LEFT JOIN pedidos p ON c.id_cliente = p.id_cliente
+WHERE p.id_pedido IS NULL;</code></pre></div>
+
+             <li>Calcule o total de vendas (faturamento) por categoria de produto.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    pr.categoria,
+    SUM(ip.quantidade * pr.preco) AS faturamento_total
+FROM itens_pedido ip
+JOIN produtos pr ON ip.id_produto = pr.id_produto
+GROUP BY pr.categoria;</code></pre></div>
+        </ol>
+        <h4>Nível 3: Desafios</h4>
+        <ol start="14">
+            <li>Qual o nome do cliente que mais gastou na loja? Você precisará calcular o gasto total por cliente e depois encontrar o maior.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    c.nome,
+    SUM(ip.quantidade * p.preco) AS gasto_total
+FROM clientes c
+JOIN pedidos pe ON c.id_cliente = pe.id_cliente
+JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido
+JOIN produtos p ON ip.id_produto = p.id_produto
+GROUP BY c.nome
+ORDER BY gasto_total DESC
+LIMIT 1;</code></pre></div>
+
+            <li>Liste os 3 produtos mais vendidos (em quantidade). Mostre o nome do produto e a quantidade total vendida.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    p.nome_produto,
+    SUM(ip.quantidade) AS quantidade_total_vendida
+FROM produtos p
+JOIN itens_pedido ip ON p.id_produto = ip.id_produto
+GROUP BY p.nome_produto
+ORDER BY quantidade_total_vendida DESC
+LIMIT 3;</code></pre></div>
+
+            <li>Encontre o ticket médio (valor médio de pedido) por cidade. O resultado deve mostrar a cidade e o valor do ticket médio.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><p>Primeiro, precisamos calcular o total de cada pedido, e depois tirar a média desses totais por cidade. Isso pode exigir uma subconsulta ou CTE, que veremos no Capítulo 6. Uma forma de fazer isso é:</p><pre><code>-- Usando uma subconsulta no FROM (ou uma CTE)
+WITH TotaisPedido AS (
+    SELECT
+        pe.id_pedido,
+        c.cidade,
+        SUM(ip.quantidade * p.preco) AS valor_total
+    FROM pedidos pe
+    JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido
+    JOIN produtos p ON ip.id_produto = p.id_produto
+    JOIN clientes c ON pe.id_cliente = c.id_cliente
+    GROUP BY pe.id_pedido, c.cidade
+)
+SELECT
+    cidade,
+    AVG(valor_total) AS ticket_medio
+FROM TotaisPedido
+GROUP BY cidade;</code></pre></div>
+            
+             <li>Para cada categoria, encontre o produto mais caro. A saída deve ser o nome da categoria e o preço máximo encontrado nela.</li>
+            <div class="toggle-solution">Mostrar/Ocultar Solução</div>
+            <div class="solution"><pre><code>SELECT
+    categoria,
+    MAX(preco) as preco_maximo
+FROM produtos
+GROUP BY categoria;</code></pre></div>
+        </ol>
+    </div>
+
+ <h2>Capítulo 5: Análise Avançada - Funções de Janela (Window Functions)</h2>
+    <p>Chegamos a um dos recursos mais poderosos e, por vezes, mais intimidadores do SQL moderno: as <strong>Funções de Janela</strong> (Window Functions). Elas permitem realizar cálculos em um conjunto de linhas relacionadas à linha atual, sem a necessidade de colapsar o resultado como o <code>GROUP BY</code> faz.</p>
+    
+    <h3>5.1. Além do `GROUP BY`: A Necessidade das Funções de Janela</h3>
+    <p>O <code>GROUP BY</code> é excelente para agregar dados e obter um resumo. Por exemplo, "qual o total de vendas <strong>por</strong> categoria?". O resultado é uma linha por categoria. Mas e se a pergunta for "para cada produto, mostre seu preço e também a média de preço <strong>da sua categoria</strong>"? Queremos manter os detalhes de cada produto, mas adicionar uma informação agregada na mesma linha.</p>
+    
+    <div class="analogy">
+        <h4>Analogia: Olhando pela Janela do Trem</h4>
+        <p>Imagine que você está em um trem e cada passageiro é uma linha de dados. Um <code>GROUP BY</code> seria como parar o trem em cada estação (categoria), fazer todos os passageiros descerem e calcular a altura média deles. Você perde a identidade de cada passageiro e só tem o resultado da estação.</p>
+        <p>Uma <strong>função de janela</strong> é como se cada passageiro pudesse olhar pela janela do trem e ver um grupo de outros passageiros (por exemplo, todos no mesmo vagão). Ele pode calcular a altura média dos passageiros que ele vê pela "janela" e anotar esse valor em seu próprio assento, <strong>sem que ninguém precise sair do trem</strong>. Cada passageiro (linha) permanece, mas agora com uma informação adicional calculada a partir de seus vizinhos.</p>
+    </div>
+
+    <h3>5.2. A Sintaxe Fundamental: `OVER(PARTITION BY ... ORDER BY ...)`</h3>
+    <p>A mágica das funções de janela acontece na cláusula <code>OVER()</code>, que define a "janela" de linhas sobre a qual a função irá operar.</p>
+    <pre><code>FUNCAO() OVER (
+    PARTITION BY coluna_para_agrupar -- Define os grupos (o "vagão do trem"). Opcional.
+    ORDER BY coluna_para_ordenar   -- Define a ordem dentro de cada grupo. Opcional, mas crucial para algumas funções.
+)</code></pre>
+    <ul>
+        <li><code>PARTITION BY</code>: É o <code>GROUP BY</code> das funções de janela. Ele divide as linhas em partições (grupos). A função é aplicada independentemente a cada partição.</li>
+        <li><code>ORDER BY</code>: Ordena as linhas dentro de cada partição. Isso é essencial para funções que dependem da ordem, como rankings ou somas acumuladas.</li>
+    </ul>
+
+    <h3>5.3. Funções de Ranking e Agregação em Janela</h3>
+    
+    <h4>Ranking: `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`</h4>
+    <p>Essas funções atribuem um ranking a cada linha dentro de sua partição com base na cláusula <code>ORDER BY</code>.</p>
+    <ul>
+        <li><code>ROW_NUMBER()</code>: Atribui um número sequencial único a cada linha (1, 2, 3, 4...). Não há empates.</li>
+        <li><code>RANK()</code>: Atribui um ranking, mas pula posições em caso de empate. (1, 2, 2, 4...).</li>
+        <li><code>DENSE_RANK()</code>: Atribui um ranking, mas não pula posições em caso de empate. (1, 2, 2, 3...).</li>
+    </ul>
+
+    <pre><code>-- Rankeia os produtos dentro de cada categoria, do mais caro para o mais barato
+SELECT
+    nome_produto,
+    categoria,
+    preco,
+    RANK() OVER (PARTITION BY categoria ORDER BY preco DESC) AS ranking_preco
+FROM produtos;</code></pre>
+
+    <h4>Agregação em Janela</h4>
+    <p>Podemos usar funções de agregação comuns (`SUM`, `AVG`, `COUNT`) como funções de janela para, por exemplo, calcular uma soma acumulada (running total).</p>
+    
+    <pre><code>-- Calcula o faturamento acumulado de pedidos ao longo do tempo
+SELECT
+    data_pedido,
+    valor_total, -- Supondo que esta coluna já exista na tabela de pedidos
+    SUM(valor_total) OVER (ORDER BY data_pedido) AS faturamento_acumulado
+FROM pedidos;</code></pre>
+
+    <h4>Deslocamento: `LAG()` e `LEAD()`</h4>
+    <p>Essas funções são incrivelmente úteis para comparar o valor de uma linha com o valor de uma linha anterior ou posterior.</p>
+    <ul>
+        <li><code>LAG(coluna, n)</code>: Acessa o valor da <code>coluna</code> de <code>n</code> linhas <strong>antes</strong> da linha atual.</li>
+        <li><code>LEAD(coluna, n)</code>: Acessa o valor da <code>coluna</code> de <code>n</code> linhas <strong>depois</strong> da linha atual.</li>
+    </ul>
+    
+    <pre><code>-- Mostra o faturamento de cada mês e o faturamento do mês anterior na mesma linha
+SELECT
+    mes,
+    faturamento_mensal,
+    LAG(faturamento_mensal, 1) OVER (ORDER BY mes) AS faturamento_mes_anterior
+FROM relatorio_mensal;</code></pre>
+
+    <div class="exercise-section"><h3>Mão na Massa: Exercícios do Capítulo 5</h3><p>Use as tabelas do capítulo anterior.</p><h4>Nível 1: Fixação</h4><ol><li>Para cada produto, mostre seu nome, preço e o preço médio de todos os produtos na mesma linha.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco, AVG(preco) OVER () AS preco_medio_geral FROM produtos;</code></pre></div><li>Atribua um número de linha sequencial para todos os pedidos, do mais antigo para o mais recente.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT id_pedido, data_pedido, ROW_NUMBER() OVER (ORDER BY data_pedido) FROM pedidos;</code></pre></div><li>Para cada produto, mostre o preço e o preço do produto mais caro da loja.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, preco, MAX(preco) OVER () AS preco_maximo FROM produtos;</code></pre></div><li>Liste todos os pedidos e, para cada um, mostre o ID do cliente e o número total de pedidos que aquele cliente já fez.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT id_pedido, id_cliente, COUNT(*) OVER (PARTITION BY id_cliente) AS total_pedidos_cliente FROM pedidos;</code></pre></div><li>Para cada pedido, mostre sua data e a data do pedido imediatamente anterior.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT data_pedido, LAG(data_pedido, 1) OVER (ORDER BY data_pedido) AS data_pedido_anterior FROM pedidos;</code></pre></div></ol><h4>Nível 2: Combinação</h4><ol start="6"><li>Rankeie os clientes dentro de cada cidade com base no seu ID (do menor para o maior).</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome, cidade, DENSE_RANK() OVER (PARTITION BY cidade ORDER BY id_cliente) AS ranking_na_cidade FROM clientes;</code></pre></div><li>Para cada produto, mostre seu nome, sua categoria e a média de preço dos produtos <strong>dentro da mesma categoria</strong>.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, categoria, preco, AVG(preco) OVER (PARTITION BY categoria) AS media_preco_categoria FROM produtos;</code></pre></div><li>Calcule o faturamento acumulado (running total) por cliente. O resultado deve ter o ID do cliente, a data do pedido, o valor do pedido e o faturamento acumulado até aquele pedido para aquele cliente.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH PedidosComValor AS (SELECT pe.id_pedido, pe.id_cliente, pe.data_pedido, SUM(ip.quantidade * p.preco) AS valor_pedido FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto GROUP BY pe.id_pedido) SELECT id_cliente, data_pedido, valor_pedido, SUM(valor_pedido) OVER (PARTITION BY id_cliente ORDER BY data_pedido) AS faturamento_acumulado FROM PedidosComValor;</code></pre></div><li>Para cada pedido, mostre seu valor e a diferença de valor para o pedido anterior do <strong>mesmo cliente</strong>.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH PedidosComValor AS (SELECT pe.id_pedido, pe.id_cliente, pe.data_pedido, SUM(ip.quantidade * p.preco) AS valor_pedido FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto GROUP BY pe.id_pedido) SELECT id_cliente, valor_pedido, valor_pedido - LAG(valor_pedido, 1, 0.0) OVER (PARTITION BY id_cliente ORDER BY data_pedido) AS diferenca_para_anterior FROM PedidosComValor;</code></pre></div><li>Encontre os 2 produtos mais caros de cada categoria.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH RankingProdutos AS (SELECT nome_produto, categoria, preco, RANK() OVER (PARTITION BY categoria ORDER BY preco DESC) as rn FROM produtos) SELECT nome_produto, categoria, preco FROM RankingProdutos WHERE rn <= 2;</code></pre></div></ol><h4>Nível 3: Desafios</h4><ol start="11"><li>Calcule a variação percentual do faturamento de um mês para o outro.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH FaturamentoMensal AS (SELECT TO_CHAR(data_pedido, 'YYYY-MM') as mes, SUM(ip.quantidade * p.preco) as faturamento FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto GROUP BY mes), FaturamentoComLag AS (SELECT mes, faturamento, LAG(faturamento, 1, 0.0) OVER (ORDER BY mes) as faturamento_anterior FROM FaturamentoMensal) SELECT mes, faturamento, faturamento_anterior, ((faturamento - faturamento_anterior) / faturamento_anterior) * 100 AS variacao_percentual FROM FaturamentoComLag WHERE faturamento_anterior > 0;</code></pre></div><li>Identifique, para cada cliente, qual foi o maior intervalo de tempo (em dias) entre duas compras consecutivas.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH DatasDeCompra AS (SELECT id_cliente, data_pedido, LAG(data_pedido, 1) OVER (PARTITION BY id_cliente ORDER BY data_pedido) as data_compra_anterior FROM pedidos) SELECT id_cliente, MAX(data_pedido::date - data_compra_anterior::date) as maior_intervalo_dias FROM DatasDeCompra WHERE data_compra_anterior IS NOT NULL GROUP BY id_cliente;</code></pre></div><li>Para cada pedido, calcule a "participação percentual" do valor de cada item no valor total do pedido.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT ip.id_pedido, ip.id_produto, p.nome_produto, (ip.quantidade * p.preco) as valor_item, SUM(ip.quantidade * p.preco) OVER (PARTITION BY ip.id_pedido) as valor_total_pedido, ((ip.quantidade * p.preco) / SUM(ip.quantidade * p.preco) OVER (PARTITION BY ip.id_pedido)) * 100 as participacao_percentual FROM itens_pedido ip JOIN produtos p ON ip.id_produto = p.id_produto;</code></pre></div><li>Liste os clientes cujo primeiro pedido foi um 'Notebook Pro'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH PedidosRankeados AS (SELECT pe.id_cliente, p.nome_produto, ROW_NUMBER() OVER (PARTITION BY pe.id_cliente ORDER BY pe.data_pedido) as rn FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto) SELECT c.nome FROM clientes c JOIN PedidosRankeados pr ON c.id_cliente = pr.id_cliente WHERE pr.rn = 1 AND pr.nome_produto = 'Notebook Pro';</code></pre></div><li>Para cada cliente, identifique se o valor de um pedido foi maior que o valor médio de todos os pedidos anteriores daquele cliente.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH PedidosComValor AS (SELECT pe.id_pedido, pe.id_cliente, pe.data_pedido, SUM(ip.quantidade * p.preco) AS valor_pedido FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto GROUP BY pe.id_pedido) SELECT id_cliente, data_pedido, valor_pedido, AVG(valor_pedido) OVER (PARTITION BY id_cliente ORDER BY data_pedido ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) as media_pedidos_anteriores, CASE WHEN valor_pedido > AVG(valor_pedido) OVER (PARTITION BY id_cliente ORDER BY data_pedido ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) THEN 'Sim' ELSE 'Não' END as maior_que_media_anterior FROM PedidosComValor;</code></pre></div></ol></div>
+
+    <h2>Capítulo 6: Estruturando Consultas Complexas - Subqueries, CTEs e Set Operators</h2>
+    <p>À medida que as perguntas se tornam mais complexas, precisamos de ferramentas para quebrar problemas grandes em partes menores. Este capítulo apresenta as técnicas para construir consultas sofisticadas de forma lógica e legível.</p>
+    <h3>6.1. Consultas Dentro de Consultas: Subqueries</h3>
+    <p>Uma <strong>subquery</strong> é uma consulta <code>SELECT</code> aninhada dentro de outra. Ela é executada primeiro, e seu resultado é usado pela consulta externa.</p>
+    <h3>6.2. Organizando o Código: Common Table Expressions (CTEs)</h3>
+    <p>As <strong>Common Table Expressions (CTEs)</strong>, definidas com a cláusula <code>WITH</code>, são uma alternativa superior às subqueries para legibilidade. Elas permitem criar "tabelas temporárias nomeadas" que existem apenas durante a execução da consulta.</p>
+    <div class="analogy"><h4>Analogia: Variáveis em Programação</h4><p>Pense em uma CTE como criar uma variável para armazenar um resultado intermediário. Em vez de aninhar cálculos, você os calcula um por um, armazena em variáveis bem nomeadas, e depois usa essas variáveis no cálculo final.</p></div>
+    <h3>6.3. Combinando Resultados de Consultas: Set Operators</h3>
+    <p>Operadores de conjunto combinam os resultados de duas ou mais consultas <code>SELECT</code> que possuem o mesmo número e tipo de colunas.</p>
+    <h4><code>UNION</code> e <code>UNION ALL</code></h4>
+    <p>Empilham os resultados. <code>UNION</code> remove as duplicatas; <code>UNION ALL</code> mantém todas as linhas e é mais rápido.</p>
+    <svg width="400" height="200" class="svg-diagram" viewBox="0 0 400 200"><text x="125" y="30" class="venn-label">Query A</text><text x="275" y="30" class="venn-label">Query B</text><g fill-opacity="0.7"><circle cx="150" cy="110" r="70" class="venn-circle-a" /><circle cx="250" cy="110" r="70" class="venn-circle-b" /></g><text x="200" y="115" class="venn-text">UNION</text></svg>
+    <p>O diagrama ilustra que <code>UNION</code> combina todos os elementos de ambas as consultas em um único resultado.</p>
+
+    <h4><code>INTERSECT</code></h4>
+    <p>Retorna apenas as linhas que estão presentes em ambos os resultados.</p>
+    <svg width="400" height="200" class="svg-diagram" viewBox="0 0 400 200"><text x="125" y="30" class="venn-label">Query A</text><text x="275" y="30" class="venn-label">Query B</text><defs><clipPath id="clipA"><circle cx="150" cy="110" r="70"/></clipPath></defs><circle cx="150" cy="110" r="70" class="venn-circle-a" fill-opacity="0.5"/><circle cx="250" cy="110" r="70" class="venn-circle-b" fill-opacity="0.5"/><circle cx="250" cy="110" r="70" class="venn-circle-b" fill="#9b59b6" fill-opacity="0.7" clip-path="url(#clipA)"/><text x="200" y="115" class="venn-text">INTERSECT</text></svg>
+    <p>O diagrama ilustra que <code>INTERSECT</code> retorna apenas a área comum a ambas as consultas.</p>
+
+    <h4><code>EXCEPT</code></h4>
+    <p>Retorna as linhas que estão no primeiro resultado, mas não no segundo.</p>
+    <svg width="400" height="200" class="svg-diagram" viewBox="0 0 400 200"><text x="125" y="30" class="venn-label">Query A</text><text x="275" y="30" class="venn-label">Query B</text><defs><clipPath id="clipB"><rect x="0" y="0" width="400" height="200"/><circle cx="250" cy="110" r="70"/></clipPath></defs><circle cx="150" cy="110" r="70" class="venn-circle-a" fill-opacity="0.5"/><circle cx="250" cy="110" r="70" class="venn-circle-b" fill-opacity="0.5"/><circle cx="150" cy="110" r="70" class="venn-circle-a" fill="#3498db" fill-opacity="0.8" clip-path="url(#clipB)"/><text x="120" y="115" class="venn-text">EXCEPT</text></svg>
+    <p>O diagrama ilustra que <code>EXCEPT</code> retorna os elementos da Query A que não fazem parte da Query B.</p>
+    <div class="exercise-section"><h3>Mão na Massa: Exercícios do Capítulo 6</h3><h4>Nível 1: Fixação</h4><ol><li>Usando subquery, encontre clientes que fizeram pedidos.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome FROM clientes WHERE id_cliente IN (SELECT DISTINCT id_cliente FROM pedidos);</code></pre></div><li>Crie uma CTE `ClientesSP` que contenha clientes de São Paulo e selecione tudo dela.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH ClientesSP AS (SELECT * FROM clientes WHERE cidade = 'São Paulo') SELECT * FROM ClientesSP;</code></pre></div><li>Use `UNION ALL` para listar nomes de clientes e produtos.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome FROM clientes UNION ALL SELECT nome_produto FROM produtos;</code></pre></div></ol><h4>Nível 2: Combinação</h4><ol start="4"><li>Encontre pedidos que contêm o produto mais caro.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT id_pedido FROM itens_pedido WHERE id_produto = (SELECT id_produto FROM produtos ORDER BY preco DESC LIMIT 1);</code></pre></div><li>Usando CTE, liste pedidos feitos por clientes de 'São Paulo'.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH ClientesSP AS (SELECT id_cliente FROM clientes WHERE cidade = 'São Paulo') SELECT p.* FROM pedidos p JOIN ClientesSP csp ON p.id_cliente = csp.id_cliente;</code></pre></div><li>Quais clientes fizeram pedidos em 2024 E 2025? Use `INTERSECT`.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT id_cliente FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2024 INTERSECT SELECT id_cliente FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2025;</code></pre></div><li>Quais clientes fizeram pedidos em 2024, MAS NÃO em 2025? Use `EXCEPT`.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT id_cliente FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2024 EXCEPT SELECT id_cliente FROM pedidos WHERE EXTRACT(YEAR FROM data_pedido) = 2025;</code></pre></div></ol><h4>Nível 3: Desafios</h4><ol start="8"><li>Com CTEs, calcule o faturamento total por cidade.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH TotaisPedido AS (SELECT pe.id_pedido, c.cidade, SUM(ip.quantidade * p.preco) AS valor_total FROM pedidos pe JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto JOIN clientes c ON pe.id_cliente = c.id_cliente GROUP BY pe.id_pedido, c.cidade) SELECT cidade, SUM(valor_total) AS faturamento FROM TotaisPedido GROUP BY cidade;</code></pre></div><li>Encontre clientes que gastaram mais que a média de todos os clientes.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH GastoPorCliente AS (SELECT c.id_cliente, c.nome, SUM(ip.quantidade * p.preco) AS gasto_total FROM clientes c JOIN pedidos pe ON c.id_cliente = pe.id_cliente JOIN itens_pedido ip ON pe.id_pedido = ip.id_pedido JOIN produtos p ON ip.id_produto = p.id_produto GROUP BY c.id_cliente, c.nome) SELECT nome, gasto_total FROM GastoPorCliente WHERE gasto_total > (SELECT AVG(gasto_total) FROM GastoPorCliente);</code></pre></div><li>Com CTEs, retorne para cada categoria o número de produtos e o total de itens vendidos.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>WITH ContagemProdutos AS (SELECT categoria, COUNT(*) as num_produtos FROM produtos GROUP BY categoria), ContagemVendas AS (SELECT p.categoria, SUM(ip.quantidade) as num_vendas FROM produtos p JOIN itens_pedido ip ON p.id_produto = ip.id_produto GROUP BY p.categoria) SELECT cp.categoria, cp.num_produtos, cv.num_vendas FROM ContagemProdutos cp LEFT JOIN ContagemVendas cv ON cp.categoria = cv.categoria;</code></pre></div></ol></div>
+
+    <h2>Capítulo 7: Lidando com Dados Semi-Estruturados - Manipulando JSON em PostgreSQL</h2>
+    <p>O mundo dos dados não é feito apenas de tabelas bem comportadas. Muitas vezes, recebemos dados de APIs ou sistemas legados no formato JSON (JavaScript Object Notation). O PostgreSQL, de forma brilhante, nos permite armazenar e consultar dados JSON diretamente no banco de dados relacional, unindo o melhor dos dois mundos.</p>
+    <p>Vamos adicionar uma coluna <code>detalhes</code> à nossa tabela de produtos para os exemplos: <code>ALTER TABLE produtos ADD COLUMN detalhes JSONB;</code></p>
+
+    <h3>7.1. O Melhor dos Dois Mundos: `JSON` vs. `JSONB`</h3>
+    <p>PostgreSQL oferece dois tipos para dados JSON:</p>
+    <ul>
+        <li><code>JSON</code>: Armazena uma cópia exata do texto de entrada. É mais rápido para inserir, pois não há processamento.</li>
+        <li><code>JSONB</code>: Armazena os dados em um formato binário decomposto. É um pouco mais lento para inserir, mas <strong>muito mais rápido para consultar</strong> e suporta indexação.</li>
+    </ul>
+    <div class="pro-tip"><h4>Regra de Ouro do JSON</h4><p>A menos que você tenha um motivo muito específico para preservar a formatação exata do JSON de entrada (espaços em branco, ordem das chaves), <strong>sempre use `JSONB`</strong>. A performance de consulta é drasticamente superior.</p></div>
+
+    <h3>7.2. Consultando Dados em JSON</h3>
+    <p>Os operadores são a chave para extrair informações de uma coluna JSONB.</p>
+    <ul>
+        <li><code>-></code>: Extrai um campo de um objeto JSON pelo nome da chave. O resultado <strong>ainda é um JSON</strong>.</li>
+        <li><code>->></code>: Extrai um campo de um objeto JSON pelo nome da chave. O resultado é convertido para <strong>texto (TEXT)</strong>.</li>
+    </ul>
+    <div class="important"><p>A diferença é sutil, mas crucial. Você usará <code>->></code> na maioria das vezes em cláusulas <code>WHERE</code>, pois pode comparar o resultado com valores de texto ou numéricos.</p></div>
+    
+    <pre><code>-- Supondo que o produto 1 tenha detalhes: '{"cor": "prata", "garantia_meses": 24}'
+UPDATE produtos SET detalhes = '{"cor": "prata", "garantia_meses": 24, "conectores": ["USB-C", "HDMI"]}' WHERE id_produto = 1;
+
+-- Extraindo a cor como texto
+SELECT detalhes ->> 'cor' AS cor FROM produtos WHERE id_produto = 1;
+
+-- Filtrando produtos com garantia de 24 meses
+-- Note o cast ::integer para comparar com um número
+SELECT nome_produto FROM produtos WHERE (detalhes ->> 'garantia_meses')::integer = 24;
+</code></pre>
+
+    <h3>7.3. Funções e Operadores Avançados de JSON</h3>
+    <ul>
+        <li><code>@></code> (Contém): Verifica se o JSON à esquerda contém o JSON à direita. Extremamente poderoso para buscas.</li>
+        <li><code>jsonb_pretty()</code>: Formata a saída JSON para ser mais legível.</li>
+    </ul>
+    <pre><code>-- Encontra todos os produtos que são da cor "prata"
+SELECT nome_produto FROM produtos WHERE detalhes @> '{"cor": "prata"}';</code></pre>
+    
+    <div class="exercise-section"><h3>Mão na Massa: Exercícios do Capítulo 7</h3><h4>Nível 1: Fixação</h4><ol><li>Adicione um detalhe JSON para o produto 2: `{"tela_polegadas": 6.5, "camera_mp": 48}`.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>UPDATE produtos SET detalhes = '{"tela_polegadas": 6.5, "camera_mp": 48}' WHERE id_produto = 2;</code></pre></div><li>Selecione o nome do produto e a cor de cada produto que tenha essa informação.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto, detalhes ->> 'cor' FROM produtos;</code></pre></div></ol><h4>Nível 2: Combinação</h4><ol start="3"><li>Liste os produtos que possuem garantia.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto FROM produtos WHERE detalhes ? 'garantia_meses';</code></pre></div><li>Encontre produtos cuja garantia seja maior que 12 meses.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto FROM produtos WHERE (detalhes ->> 'garantia_meses')::integer > 12;</code></pre></div></ol><h4>Nível 3: Desafios</h4><ol start="5"><li>Encontre produtos que tenham um conector 'HDMI' em sua lista de conectores.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>SELECT nome_produto FROM produtos WHERE detalhes -> 'conectores' @> '["HDMI"]';</code></pre></div></ol></div>
+
+    <h2>Capítulo 8: Garantindo a Integridade - Transações e Concorrência</h2>
+    <h3>8.1. O que é uma Transação? As Propriedades ACID</h3>
+    <p>Uma <strong>transação</strong> é uma sequência de uma ou mais operações SQL que são executadas como uma única unidade de trabalho lógica. Ou todas as operações são bem-sucedidas (commit), ou nenhuma delas é (rollback).</p>
+    <div class="analogy"><h4>Analogia: A Transferência Bancária</h4><p>Uma transferência entre duas contas bancárias consiste em duas operações: 1) Debitar o valor da conta A; 2) Creditar o valor na conta B. Se a energia acabar após a etapa 1 mas antes da 2, o dinheiro desaparece! Uma transação garante que ambas as operações aconteçam ou, se algo der errado, que a etapa 1 seja desfeita, como se nada tivesse acontecido.</p></div>
+    <p>Isso é garantido pelas propriedades <strong>ACID</strong>:</p>
+    <ul><li><strong>A</strong>tomicidade: Tudo ou nada.</li><li><strong>C</strong>onsistência: O banco de dados vai de um estado válido para outro.</li><li><strong>I</strong>solamento: Transações concorrentes não interferem umas nas outras.</li><li><strong>D</strong>urabilidade: Uma vez que a transação é confirmada (commit), os dados não serão perdidos.</li></ul>
+    <h3>8.2. Comandos de Controle de Transação</h3>
+    <ul><li><code>BEGIN</code>: Inicia um bloco de transação.</li><li><code>COMMIT</code>: Salva permanentemente todas as alterações feitas no bloco.</li><li><code>ROLLBACK</code>: Desfaz todas as alterações feitas no bloco.</li></ul>
+    <pre><code>-- Cenário: Vender 1 Cadeira Gamer (id 3) e atualizar o estoque
+BEGIN; -- Inicia a transação
+
+-- Insere o item no pedido 108
+INSERT INTO itens_pedido (id_pedido, id_produto, quantidade) VALUES (108, 3, 1);
+
+-- Debita o estoque do produto
+UPDATE produtos SET estoque = estoque - 1 WHERE id_produto = 3;
+
+-- Se tudo ocorreu bem até aqui:
+COMMIT; -- Confirma as duas operações.
+
+-- Se algo desse errado, poderíamos executar ROLLBACK; para desfazer tudo.
+</code></pre>
+    <div class="exercise-section"><h3>Mão na Massa: Exercícios do Capítulo 8</h3><h4>Nível 1: Fixação</h4><ol><li>O que a propriedade de Atomicidade garante?</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><p>Garante que todas as operações dentro de uma transação sejam concluídas com sucesso. Se uma falhar, todas são desfeitas (rollback). É o princípio do "tudo ou nada".</p></div></ol><h4>Nível 2: Combinação</h4><ol start="2"><li>Escreva um bloco de transação para deletar um cliente (id 4) e todos os seus pedidos.</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>BEGIN; DELETE FROM pedidos WHERE id_cliente = 4; DELETE FROM clientes WHERE id_cliente = 4; COMMIT;</code></pre></div></ol><h4>Nível 3: Desafios</h4><ol start="3"><li>Por que uma simples operação de `UPDATE` é, na verdade, uma transação implícita de uma única instrução?</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><p>Porque o próprio SGBD garante que a operação de atualização seja atômica. Se você tentar atualizar 1 milhão de linhas e o sistema falhar no meio, o banco de dados garantirá (através de seus logs de transação) que nenhuma linha seja deixada em um estado inconsistente. Ele fará o rollback da operação inteira.</p></div></ol></div>
+
+    <h2>Capítulo 9: Escrevendo Código de Elite - Performance e Otimização</h2>
+    <p>Escrever SQL que funciona é o primeiro passo. Escrever SQL que funciona <strong>rápido</strong> é o que diferencia um profissional. A otimização de consultas é a arte de entender como o banco de dados executa sua consulta e ajudá-lo a encontrar o caminho mais eficiente.</p>
+    <h3>9.1. Analisando o Plano de Execução: `EXPLAIN`</h3>
+    <p>O comando <code>EXPLAIN</code> é a sua ferramenta de diagnóstico. Ele não executa a consulta, mas mostra o <strong>plano de execução</strong> que o otimizador do PostgreSQL escolheu. <code>EXPLAIN ANALYZE</code> executa a consulta e mostra o plano com os tempos reais.</p>
+    <pre><code>EXPLAIN ANALYZE SELECT * FROM clientes WHERE cidade = 'São Paulo';</code></pre>
+    <p>A saída pode mostrar um `Seq Scan` (Sequential Scan), que significa que o banco de dados teve que ler a tabela inteira, linha por linha, para encontrar os resultados. Para tabelas grandes, isso é muito lento.</p>
+    <h3>9.2. A Ferramenta Mais Poderosa: Índices (Indexes)</h3>
+    <div class="analogy"><h4>Analogia: O Índice Remissivo de um Livro</h4><p>Procurar por "São Paulo" em uma tabela sem índice é como procurar uma palavra em um livro lendo-o do início ao fim. Um <strong>índice</strong> na coluna `cidade` é como o índice remissivo no final do livro: ele é uma estrutura de dados ordenada que diz ao banco exatamente em quais "páginas" (blocos de dados) ele pode encontrar 'São Paulo', sem precisar ler o livro todo.</p></div>
+    <pre><code>-- Criando um índice na coluna 'cidade'
+CREATE INDEX idx_clientes_cidade ON clientes(cidade);</code></pre>
+    <p>Se você rodar o <code>EXPLAIN ANALYZE</code> novamente, o plano provavelmente mudará para um `Index Scan` ou `Bitmap Heap Scan`, que são muito mais rápidos.</p>
+    <h3>9.3. Boas Práticas e Erros Comuns</h3>
+    <ul><li><strong>Evite `SELECT *`</strong>: Peça apenas as colunas que você precisa.</li><li><strong>Cuidado com funções no `WHERE`</strong>: `WHERE LOWER(nome) = 'joão'` impede o uso de um índice em `nome`. O ideal é `WHERE nome = 'João'`.</li><li><strong>Prefira `JOINs` a subqueries correlacionadas</strong>: Geralmente são mais performáticas.</li></ul>
+    <div class="exercise-section"><h3>Mão na Massa: Exercícios do Capítulo 9</h3><h4>Nível 1: Fixação</h4><ol><li>Qual comando mostra o plano de execução de uma consulta sem executá-la?</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><pre><code>EXPLAIN</code></pre></div></ol><h4>Nível 2: Combinação</h4><ol start="2"><li>Para a consulta `SELECT * FROM pedidos WHERE data_pedido BETWEEN '2025-01-01' AND '2025-03-31'`, qual coluna é a melhor candidata para um índice?</li><div class="toggle-solution">Mostrar/Ocultar Solução</div><div class="solution"><p>A coluna `data_pedido`, pois ela está sendo usada para filtrar um intervalo na cláusula `WHERE`.</p></div></ol></div>
+
+    <h2>Capítulo 10: O Ciclo de Vida dos Dados - Introdução ao ETL e ELT</h2>
+    <p>De onde vêm os dados que analisamos? Raramente eles nascem perfeitamente estruturados no nosso banco de dados. Eles são trazidos de diversas fontes através de processos conhecidos como ETL e ELT.</p>
+    <h3>10.1. Extração (Extract): De onde vêm os dados</h3>
+    <p>A primeira etapa é a <strong>extração</strong>. Os dados são coletados de suas fontes originais, que podem ser:</p>
+    <ul><li>Outros bancos de dados (de sistemas de vendas, RH, etc.).</li><li>Arquivos, como planilhas CSV ou logs de servidores.</li><li>APIs de serviços de terceiros (ex: Google Analytics, Salesforce).</li></ul>
+    <h3>10.2. Transformação (Transform): A limpeza e a regra de negócio</h3>
+    <p>Esta é a etapa mais complexa. Os dados brutos extraídos são limpos, padronizados e enriquecidos. As transformações podem incluir:</p>
+    <ul><li>Limpeza de dados (remover nulos, corrigir erros de digitação).</li><li>Padronização de formatos (ex: unificar padrões de data).</li><li>Aplicação de regras de negócio (ex: calcular margem de lucro).</li><li>Junção de dados de diferentes fontes.</li></ul>
+    <h3>10.3. Carga (Load): Guardando o resultado</h3>
+    <p>Finalmente, os dados transformados e limpos são <strong>carregados</strong> em um destino final, geralmente um <strong>Data Warehouse (DW)</strong>, que é um banco de dados otimizado para análise e relatórios.</p>
+    <div class="important"><p>O fluxo tradicional é <strong>ETL: Extract -> Transform -> Load</strong>. A transformação ocorre em um servidor intermediário antes dos dados chegarem ao destino.</p></div>
+    <h3>10.4. A Nova Abordagem: ELT</h3>
+    <p>Com o surgimento de Data Warehouses em nuvem extremamente poderosos (como Google BigQuery, Amazon Redshift, Snowflake), uma nova abordagem se tornou popular: <strong>ELT: Extract -> Load -> Transform</strong>.</p>
+    <p>Nesse modelo, os dados brutos são carregados primeiro no Data Warehouse (ou em um Data Lake). A transformação acontece <strong>depois</strong>, usando o poder de processamento massivo do próprio DW, geralmente através de SQL. Isso oferece mais flexibilidade, pois os dados brutos ficam preservados para futuras re-análises com diferentes regras de negócio.</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.toggle-solution');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const solution = this.nextElementSibling;
+                    if (solution.style.display === 'block') {
+                        solution.style.display = 'none';
+                        this.textContent = 'Mostrar/Ocultar Solução';
+                    } else {
+                        solution.style.display = 'block';
+                        this.textContent = 'Ocultar Solução';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
